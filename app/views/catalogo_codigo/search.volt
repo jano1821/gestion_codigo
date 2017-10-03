@@ -28,17 +28,18 @@
                         </tr>
                     <tbody>
                     {% if page.items is defined %}
-                        {% for catalogo_codigo in page.items %}
+                        {% for beanCatalogoCodigo in listBeanCatalogoCodigo %}
                             <tr>
-                                <td>{{ catalogo_codigo.valorCodigo }}</td>
-                                <td>{{ catalogo_codigo.descripcionCodigo }}</td>
-                                <td>{{ catalogo_codigo.fechaRegistro }}</td>
-                                <td>{{ catalogo_codigo.Requerimiento }}</td>
-                                <td>{{ catalogo_codigo.idLiderTecnico }}</td>
-                                <td>{{ catalogo_codigo.idLiderFuncional }}</td>
-                                <td>{{ catalogo_codigo.idTipoCodigo }}</td>
-                                <td>{{ link_to("catalogo_codigo/edit/"~catalogo_codigo.idCodigo, "<i class='glyphicon glyphicon-edit'></i>","class":"btn btn-default") }}</td>
-                                <td>{{ link_to("catalogo_codigo/delete/"~catalogo_codigo.idCodigo, "<i class='glyphicon glyphicon-trash'></i>","class":"btn btn-default") }}</td>
+                                <td>{{ beanCatalogoCodigo.getValorCodigo() }}</td>
+                                <td>{{ beanCatalogoCodigo.getDescripcionCodigo() }}</td>
+                                <td align="center">{{ beanCatalogoCodigo.getFechaRegistro() }}</td>
+                                <td>{{ beanCatalogoCodigo.getRequerimiento() }}</td>
+                                <td>{{ beanCatalogoCodigo.getNombreLiderTecnico() }}</td>
+                                <td>{{ beanCatalogoCodigo.getNombreLiderfuncional() }}</td>
+                                <td>{{ beanCatalogoCodigo.getDescripcionTipoProducto() }}</td>
+
+                                <td>{{ link_to("catalogo_codigo/edit/"~beanCatalogoCodigo.getIdCodigo(), "<i class='glyphicon glyphicon-edit'></i>","class":"btn btn-default") }}</td>
+                                <td>{{ link_to("catalogo_codigo/delete/"~beanCatalogoCodigo.getIdCodigo(), "<i class='glyphicon glyphicon-trash'></i>","class":"btn btn-default") }}</td>
                             </tr>
                         {% endfor %}
                     {% endif %}

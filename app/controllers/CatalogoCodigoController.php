@@ -33,6 +33,9 @@ class CatalogoCodigoController extends ControllerBase {
      */
     public function searchAction() {
         $numberPage = 1;
+        $descripcion = '';
+        $nombreLiderTecnico = '';
+        $nombreLiderFuncional = '';
         if ($this->request->isPost()) {
             $query = parent::fromInput($this->di,'CatalogoCodigo',$_POST);
             $this->persistent->parameters = $query->getParams();
@@ -56,6 +59,44 @@ class CatalogoCodigoController extends ControllerBase {
             ]);
 
             return;
+        }else{
+            $listBeanCatalogoCodigo = array();
+            foreach ($catalogo_codigo as $codigo) {
+                $beanCatalogoCodigo = new BeanCatalogoCodigo();
+                
+                $date = new DateTime($codigo->getFechaRegistro());
+                
+                $beanCatalogoCodigo->setIdCodigo($codigo->getIdCodigo());
+                $beanCatalogoCodigo->setValorCodigo($codigo->getValorCodigo());
+                $beanCatalogoCodigo->setDescripcionCodigo($codigo->getDescripcionCodigo());
+                $beanCatalogoCodigo->setFechaRegistro($date->format('d/m/Y'));
+                $beanCatalogoCodigo->setRequerimiento($codigo->getRequerimiento());
+                $beanCatalogoCodigo->setIdLiderTecnico($codigo->getIdLiderTecnico());
+                $beanCatalogoCodigo->setIdLiderFuncional($codigo->getIdLiderFuncional());
+                $beanCatalogoCodigo->setIdTipoCodigo($codigo->getIdTipoCodigo());
+                
+                $tipocodigo = Tipocodigo::find($codigo->getIdTipoCodigo());
+                foreach ($tipocodigo as $tupla) {
+                    $descripcion = $tupla->getDescripcionTipo();
+                }
+                $beanCatalogoCodigo->setDescripcionTipoProducto($descripcion);
+                
+                $liderTecnico = Persona::find($codigo->getIdLiderTecnico());
+                foreach ($liderTecnico as $tupla) {
+                    $nombreLiderTecnico = $tupla->getNombrePersona();
+                }
+                
+                $beanCatalogoCodigo->setNombreLiderTecnico($nombreLiderTecnico);
+                
+                $liderFuncional = Persona::find($codigo->getIdLiderFuncional());
+                foreach ($liderFuncional as $tupla) {
+                    $nombreLiderFuncional = $tupla->getNombrePersona();
+                }
+                
+                $beanCatalogoCodigo->setNombreLiderfuncional($nombreLiderFuncional);
+                
+                array_push($listBeanCatalogoCodigo,$beanCatalogoCodigo);
+            }
         }
 
         $paginator = new Paginator([
@@ -65,6 +106,7 @@ class CatalogoCodigoController extends ControllerBase {
         ]);
 
         $this->view->page = $paginator->getPaginate();
+        $this->view->listBeanCatalogoCodigo = $listBeanCatalogoCodigo;
     }
 
     /**
