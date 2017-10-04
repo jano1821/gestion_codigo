@@ -18,8 +18,7 @@ class TipocodigoController extends ControllerBase
     /**
      * Searches for tipocodigo
      */
-    public function searchAction()
-    {
+    public function searchAction() {
         $numberPage = 1;
         if ($this->request->isPost()) {
             $query = Parent::fromInput($this->di, 'Tipocodigo', $_POST);
@@ -36,7 +35,7 @@ class TipocodigoController extends ControllerBase
 
         $tipocodigo = Tipocodigo::find($parameters);
         if (count($tipocodigo) == 0) {
-            $this->flash->notice("No se Obtuvieron Resultados en la Búsqueda");
+            $this->flash->notice("No se Encontraron Resultados en la Búsqueda");
 
             $this->dispatcher->forward([
                 "controller" => "tipocodigo",
@@ -74,7 +73,7 @@ class TipocodigoController extends ControllerBase
 
             $tipocodigo = Tipocodigo::findFirstByidTipoCodigo($idTipoCodigo);
             if (!$tipocodigo) {
-                $this->flash->error("tipocodigo was not found");
+                $this->flash->error("Tipo de Código no Encontrado");
 
                 $this->dispatcher->forward([
                     'controller' => "tipocodigo",
@@ -155,7 +154,7 @@ class TipocodigoController extends ControllerBase
         $tipocodigo = Tipocodigo::findFirstByidTipoCodigo($idTipoCodigo);
 
         if (!$tipocodigo) {
-            $this->flash->error("tipocodigo does not exist " . $idTipoCodigo);
+            $this->flash->error("Tipo de Código no Existe " . $idTipoCodigo);
 
             $this->dispatcher->forward([
                 'controller' => "tipocodigo",

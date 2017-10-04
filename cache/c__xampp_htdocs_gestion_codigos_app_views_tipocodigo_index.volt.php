@@ -45,7 +45,7 @@
     <label for="fieldEstadoregistro" class="control-label">Estado de Registro</label>
 </div>
                     <div class="col-md-2">
-        <?= $this->tag->textField(['estadoRegistro', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldEstadoregistro']) ?>
+        <?= $this->tag->selectStatic(['estadoRegistro', ['' => 'Seleccione Tipo...', 'S' => 'Activo', 'N' => 'Inactivo'], 'class' => 'form-control']) ?>
     </div>
 </div>
 

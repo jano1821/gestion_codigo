@@ -1,29 +1,27 @@
 <div class="row">
-    <nav>
-        <ul class="pager">
-            <li class="previous"><?= $this->tag->linkTo(['cargo/index', 'Go Back']) ?></li>
-            <li class="next"><?= $this->tag->linkTo(['cargo/new', 'Create ']) ?></li>
-        </ul>
-    </nav>
+<div class="container">
+<div class="panel panel-info">
+<div class="panel-heading">
+<div class="btn-group pull-right">
+        <?= $this->tag->linkTo(['cargo/index', '<i class=\'glyphicon glyphicon-chevron-left\'></i> Volver', 'class' => 'btn btn-info']) ?>
+<?= $this->tag->linkTo(['cargo/new', '<i class=\'glyphicon glyphicon-plus\'></i> Nuevo Cargo', 'class' => 'btn btn-info']) ?>
 </div>
-
+<h4><i class='glyphicon glyphicon-search'></i> Resultado de Busqueda</h4>
+</div>
 <div class="page-header">
-    <h1>Search result</h1>
 </div>
 
 <?= $this->getContent() ?>
 
-<div class="row">
-    <table class="table table-bordered">
-        <thead>
+<div class="table-responsive">
+<table class="table">
             <tr>
-                <th>IdCargo</th>
-            <th>DescripcionCargo</th>
+                <th>Id Cargo</th>
+            <th>Descripcion de Cargo</th>
 
                 <th></th>
                 <th></th>
             </tr>
-        </thead>
         <tbody>
         <?php if (isset($page->items)) { ?>
         <?php foreach ($page->items as $cargo) { ?>
@@ -31,29 +29,33 @@
                 <td><?= $cargo->idCargo ?></td>
             <td><?= $cargo->descripcionCargo ?></td>
 
-                <td><?= $this->tag->linkTo(['cargo/edit/' . $cargo->idCargo, 'Edit']) ?></td>
-                <td><?= $this->tag->linkTo(['cargo/delete/' . $cargo->idCargo, 'Delete']) ?></td>
+<td><?= $this->tag->linkTo(['cargo/edit/' . $cargo->idCargo, '<i class=\'glyphicon glyphicon-edit\'></i>', 'class' => 'btn btn-default']) ?></td>
+<td><?= $this->tag->linkTo(['cargo/delete/' . $cargo->idCargo, '<i class=\'glyphicon glyphicon-trash\'></i>', 'class' => 'btn btn-default']) ?></td>
             </tr>
         <?php } ?>
         <?php } ?>
         </tbody>
-    </table>
+</table>
 </div>
 
 <div class="row">
-    <div class="col-sm-1">
-        <p class="pagination" style="line-height: 1.42857;padding: 6px 12px;">
-            <?= $page->current . '/' . $page->total_pages ?>
-        </p>
-    </div>
-    <div class="col-sm-11">
-        <nav>
-            <ul class="pagination">
-                <li><?= $this->tag->linkTo(['cargo/search', 'First']) ?></li>
-                <li><?= $this->tag->linkTo(['cargo/search?page=' . $page->before, 'Previous']) ?></li>
-                <li><?= $this->tag->linkTo(['cargo/search?page=' . $page->next, 'Next']) ?></li>
-                <li><?= $this->tag->linkTo(['cargo/search?page=' . $page->last, 'Last']) ?></li>
+<div class="col-sm-1">
+<p class="pagination" style="line-height: 1.42857;padding: 6px 12px;">
+<?= $page->current . '/' . $page->total_pages ?>
+</p>
+</div>
+<div class="col-sm-11">
+<nav>
+<ul class="pagination">
+                <li><?= $this->tag->linkTo(['cargo/search', 'Primero']) ?></li>
+                <li><?= $this->tag->linkTo(['cargo/search?page=' . $page->before, 'Anterior']) ?></li>
+                <li><?= $this->tag->linkTo(['cargo/search?page=' . $page->next, 'Siguiente']) ?></li>
+                <li><?= $this->tag->linkTo(['cargo/search?page=' . $page->last, 'Ultimo']) ?></li>
             </ul>
-        </nav>
-    </div>
+</nav>
+</div>
+</div>
+
+</div>
+</div>
 </div>

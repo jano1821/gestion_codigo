@@ -1,33 +1,42 @@
 <div class="row">
-    <nav>
-        <ul class="pager">
-            <li class="previous">{{ link_to("cargo", "Go Back") }}</li>
-        </ul>
-    </nav>
-</div>
-
-<div class="page-header">
-    <h1>
-        Create cargo
-    </h1>
-</div>
+    <div class="container">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+	    <div class="btn-group pull-right">
+        {{ link_to("cargo/index", "<i class='glyphicon glyphicon-chevron-left'></i> Volver","class":"btn btn-info") }}
+            </div>
+            <h4><i class='glyphicon glyphicon-record'></i> Registrar Nuevo Cargo</h4>
+	</div>
+        <div class="page-header">
+        </div>
 
 {{ content() }}
 
 {{ form("cargo/create", "method":"post", "autocomplete" : "off", "class" : "form-horizontal") }}
 
-<div class="form-group">
-    <label for="fieldDescripcioncargo" class="col-sm-2 control-label">DescripcionCargo</label>
-    <div class="col-sm-10">
+<div class="table">
+                <div class="form-group">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-2">
+    <label for="fieldDescripcioncargo" class="control-label">Descripcion de Cargo</label>
+</div>
+                    <div class="col-md-2">
         {{ text_field("descripcionCargo", "size" : 30, "class" : "form-control", "id" : "fieldDescripcioncargo") }}
     </div>
 </div>
 
 
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        {{ submit_button('Save', 'class': 'btn btn-default') }}
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                        {{ submit_button('Guardar', 'class': 'col-sm-10 btn btn-primary') }}
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
-
-</form>

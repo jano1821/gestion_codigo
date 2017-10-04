@@ -36,7 +36,7 @@ class CargoController extends ControllerBase
 
         $cargo = Cargo::find($parameters);
         if (count($cargo) == 0) {
-            $this->flash->notice("The search did not find any cargo");
+            $this->flash->notice("Busqueda no Encontró Resultados");
 
             $this->dispatcher->forward([
                 "controller" => "cargo",
@@ -123,7 +123,7 @@ class CargoController extends ControllerBase
             return;
         }
 
-        $this->flash->success("cargo was created successfully");
+        $this->flash->success("Cargo Registrado Correctamente");
 
         $this->dispatcher->forward([
             'controller' => "cargo",
@@ -151,7 +151,7 @@ class CargoController extends ControllerBase
         $cargo = Cargo::findFirstByidCargo($idCargo);
 
         if (!$cargo) {
-            $this->flash->error("cargo does not exist " . $idCargo);
+            $this->flash->error("Cargo no Existe" . $idCargo);
 
             $this->dispatcher->forward([
                 'controller' => "cargo",
@@ -179,7 +179,7 @@ class CargoController extends ControllerBase
             return;
         }
 
-        $this->flash->success("cargo was updated successfully");
+        $this->flash->success("Cargo Actualizado Satisfactoriamente");
 
         $this->dispatcher->forward([
             'controller' => "cargo",
@@ -196,7 +196,7 @@ class CargoController extends ControllerBase
     {
         $cargo = Cargo::findFirstByidCargo($idCargo);
         if (!$cargo) {
-            $this->flash->error("cargo was not found");
+            $this->flash->error("Cargo no Encontrado");
 
             $this->dispatcher->forward([
                 'controller' => "cargo",
@@ -220,7 +220,7 @@ class CargoController extends ControllerBase
             return;
         }
 
-        $this->flash->success("cargo was deleted successfully");
+        $this->flash->success("Cargo Eliminado Correctamente");
 
         $this->dispatcher->forward([
             'controller' => "cargo",

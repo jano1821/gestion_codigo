@@ -18,8 +18,8 @@ class ModuloController extends ControllerBase {
         $numberPage = 1;
         if ($this->request->isPost()) {
             $query = parent::fromInput($this->di,
-                                         'Modulo',
-                                         $_POST);
+                                       'Modulo',
+                                       $_POST);
             $this->persistent->parameters = $query->getParams();
         }else {
             $numberPage = $this->request->getQuery("page",
@@ -34,7 +34,7 @@ class ModuloController extends ControllerBase {
 
         $modulo = Modulo::find($parameters);
         if (count($modulo) == 0) {
-            $this->flash->notice("The search did not find any modulo");
+            $this->flash->notice("La Búsqueda no Encontró Resultados");
 
             $this->dispatcher->forward([
                             "controller" => "modulo",

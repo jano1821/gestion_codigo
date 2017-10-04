@@ -3,16 +3,16 @@
 <div class="panel panel-info">
 <div class="panel-heading">
 <div class="btn-group pull-right">
-        {{ link_to("usuario/index", "<i class='glyphicon glyphicon-chevron-left'></i> Volver","class":"btn btn-info") }}
+        <?= $this->tag->linkTo(['usuario/index', '<i class=\'glyphicon glyphicon-chevron-left\'></i> Volver', 'class' => 'btn btn-info']) ?>
 </div>
-<h4><i class='glyphicon glyphicon-edit'></i> Editar Usuario</h4>
+<h4><i class='glyphicon glyphicon-edit'></i> Editar Tipo</h4>
 </div>
 <div class="page-header">
 </div>
 
-{{ content() }}
+<?= $this->getContent() ?>
 
-{{ form("usuario/save", "method":"post", "autocomplete" : "off", "class" : "form-horizontal") }}
+<?= $this->tag->form(['usuario/save', 'method' => 'post', 'autocomplete' => 'off', 'class' => 'form-horizontal']) ?>
 
 <div class="table">
 <div class="form-group">
@@ -22,7 +22,7 @@
     <label for="fieldUsername" class="control-label">Nombre de Usuario</label>
 </div>
 <div class="col-md-3">
-        {{ text_field("userName", "size" : 30, "class" : "form-control", "id" : "fieldUsername") }}
+        <?= $this->tag->textField(['userName', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldUsername']) ?>
     </div>
 </div>
 
@@ -33,7 +33,7 @@
     <label for="fieldPassword" class="control-label">Password</label>
 </div>
 <div class="col-md-3">
-        {{ text_field("password", "size" : 30, "class" : "form-control", "id" : "fieldPassword") }}
+        <?= $this->tag->textField(['password', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldPassword']) ?>
     </div>
 </div>
 
@@ -44,12 +44,12 @@
     <label for="fieldEstadoregistro" class="control-label">Estado de Registro</label>
 </div>
 <div class="col-md-3">
-        {{ text_field("estadoRegistro", "size" : 30, "class" : "form-control", "id" : "fieldEstadoregistro") }}
+        <?= $this->tag->textField(['estadoRegistro', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldEstadoregistro']) ?>
     </div>
 </div>
 
 
-{{ hidden_field("idUsuario") }}
+<?= $this->tag->hiddenField(['idUsuario']) ?>
 
 <div class="form-group">
 <div class="col-md-3">
@@ -57,7 +57,7 @@
 <div class="col-md-2">
 </div>
 <div class="col-md-2">
-{{ submit_button('Guardar', 'class': 'btn btn-primary') }}
+<?= $this->tag->submitButton(['Guardar', 'class' => 'btn btn-primary']) ?>
 </div>
 </div>
 

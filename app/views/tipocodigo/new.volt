@@ -44,7 +44,7 @@
 <label for="fieldEstadoregistro" class="control-label">Estado de Registro</label>
 </div>
 <div class="col-md-2">
-{{ text_field("estadoRegistro", "size" : 30, "class" : "form-control", "id" : "fieldEstadoregistro") }}
+{{ select_static('estadoRegistro', [ '':'Seleccione Tipo...', 'S' : 'Activo', 'N' : 'Inactivo'], "class": "form-control") }}
 </div>
 </div>
 

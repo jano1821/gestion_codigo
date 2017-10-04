@@ -35,7 +35,7 @@ class UsuarioController extends ControllerBase {
 
         $usuario = Usuario::find($parameters);
         if (count($usuario) == 0) {
-            $this->flash->notice("The search did not find any usuario");
+            $this->flash->notice("La Búsqueda no Encontró Resultados");
 
             $this->dispatcher->forward([
                             "controller" => "usuario",
@@ -71,7 +71,7 @@ class UsuarioController extends ControllerBase {
 
             $usuario = Usuario::findFirstByidUsuario($idUsuario);
             if (!$usuario) {
-                $this->flash->error("usuario was not found");
+                $this->flash->error("Usuario no Encontrado");
 
                 $this->dispatcher->forward([
                                 'controller' => "usuario",
@@ -153,7 +153,7 @@ class UsuarioController extends ControllerBase {
         $usuario = Usuario::findFirstByidUsuario($idUsuario);
 
         if (!$usuario) {
-            $this->flash->error("usuario does not exist " . $idUsuario);
+            $this->flash->error("Usuario no Existe" . $idUsuario);
 
             $this->dispatcher->forward([
                             'controller' => "usuario",
@@ -183,7 +183,7 @@ class UsuarioController extends ControllerBase {
             return;
         }
 
-        $this->flash->success("usuario was updated successfully");
+        $this->flash->success("Usuario Actualizado Satisfactoriamente");
 
         $this->dispatcher->forward([
                         'controller' => "usuario",
@@ -199,7 +199,7 @@ class UsuarioController extends ControllerBase {
     public function deleteAction($idUsuario) {
         $usuario = Usuario::findFirstByidUsuario($idUsuario);
         if (!$usuario) {
-            $this->flash->error("usuario was not found");
+            $this->flash->error("Usuario no Encontrado");
 
             $this->dispatcher->forward([
                             'controller' => "usuario",
@@ -223,7 +223,7 @@ class UsuarioController extends ControllerBase {
             return;
         }
 
-        $this->flash->success("usuario was deleted successfully");
+        $this->flash->success("Usuario eliminado satisfactoriamente");
 
         $this->dispatcher->forward([
                         'controller' => "usuario",
