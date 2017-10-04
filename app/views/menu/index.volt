@@ -65,6 +65,7 @@
                         <li>{{ link_to("tipocodigo/index", "Tipo de Codigo") }}</li>
                         <li>{{ link_to("persona/index", "Persona") }}</li>
                         <li>{{ link_to("usuario/index", "Usuario") }}</li>
+                        <li>{{ link_to("modulo/index", "Modulo") }}</li>
                     </ul>
                 </li>
                 <li><a href="">Codigos</a>
@@ -94,35 +95,11 @@
             <tr>
 
                 <td align="left">
-        <?php  /*echo $this->tag->select(array("tipoCodigo",
-                                Tipocodigo::find("estadoRegistro = 'S'"),
-                                "useEmpty"  =>  true,
-                                "emptyText" =>  "...Seleccione...",
-                                "using" => array("idTipoCodigo", "descripcionTipo"),
-                                ));*/
-        ?>
                 </td>
             </tr>  
         </table>
 
         <script type="text/javascript">
-            /*$(document).ready(function ()
-             {
-             $("#country").change(function ()
-             {
-             var value = $(this).val();
-             var url = 'http://' + '<?php echo $_SERVER['HTTP_HOST']?>' + '/test/tbl_personaldetails/stateDependant';
-             $.ajax({
-             type: 'POST',
-             //dataType:'json',  //if i uncomment this didn't get reply
-             url: url,
-             data: {country_id: value}
-             })
-             .done(function (msg) {
-             alert("Data Saved: " + msg);
-             });
-             });
-             });*/
         </script>
     </body>
 </html

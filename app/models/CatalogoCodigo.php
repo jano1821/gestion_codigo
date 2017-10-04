@@ -1,8 +1,6 @@
 <?php
 
-class CatalogoCodigo extends \Phalcon\Mvc\Model
-{
-
+class CatalogoCodigo extends \Phalcon\Mvc\Model {
     /**
      *
      * @var integer
@@ -11,55 +9,54 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      * @Column(type="integer", length=11, nullable=false)
      */
     public $idCodigo;
-
     /**
      *
      * @var string
      * @Column(type="string", length=45, nullable=true)
      */
     public $valorCodigo;
-
     /**
      *
      * @var string
      * @Column(type="string", length=2000, nullable=true)
      */
     public $descripcionCodigo;
-
     /**
      *
      * @var string
      * @Column(type="string", nullable=true)
      */
     public $fechaRegistro;
-
     /**
      *
      * @var string
      * @Column(type="string", length=20, nullable=true)
      */
     public $requerimiento;
-
     /**
      *
      * @var integer
      * @Column(type="integer", length=11, nullable=false)
      */
     public $idLiderTecnico;
-
     /**
      *
      * @var integer
      * @Column(type="integer", length=11, nullable=false)
      */
     public $idLiderFuncional;
-
     /**
      *
      * @var integer
      * @Column(type="integer", length=11, nullable=false)
      */
     public $idTipoCodigo;
+    /**
+     *
+     * @var integer
+     * @column(type="integer", length=11, nullable=false)
+     */
+    public $idModulo;
 
     /**
      * Method to set the value of field idCodigo
@@ -67,8 +64,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      * @param integer $idCodigo
      * @return $this
      */
-    public function setIdCodigo($idCodigo)
-    {
+    public function setIdCodigo($idCodigo) {
         $this->idCodigo = $idCodigo;
 
         return $this;
@@ -80,8 +76,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      * @param string $valorCodigo
      * @return $this
      */
-    public function setValorCodigo($valorCodigo)
-    {
+    public function setValorCodigo($valorCodigo) {
         $this->valorCodigo = $valorCodigo;
 
         return $this;
@@ -93,8 +88,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      * @param string $descripcionCodigo
      * @return $this
      */
-    public function setDescripcionCodigo($descripcionCodigo)
-    {
+    public function setDescripcionCodigo($descripcionCodigo) {
         $this->descripcionCodigo = $descripcionCodigo;
 
         return $this;
@@ -106,8 +100,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      * @param string $fechaRegistro
      * @return $this
      */
-    public function setFechaRegistro($fechaRegistro)
-    {
+    public function setFechaRegistro($fechaRegistro) {
         $this->fechaRegistro = $fechaRegistro;
 
         return $this;
@@ -119,8 +112,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      * @param string $requerimiento
      * @return $this
      */
-    public function setRequerimiento($requerimiento)
-    {
+    public function setRequerimiento($requerimiento) {
         $this->requerimiento = $requerimiento;
 
         return $this;
@@ -132,8 +124,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      * @param integer $idLiderTecnico
      * @return $this
      */
-    public function setIdLiderTecnico($idLiderTecnico)
-    {
+    public function setIdLiderTecnico($idLiderTecnico) {
         $this->idLiderTecnico = $idLiderTecnico;
 
         return $this;
@@ -145,8 +136,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      * @param integer $idLiderFuncional
      * @return $this
      */
-    public function setIdLiderFuncional($idLiderFuncional)
-    {
+    public function setIdLiderFuncional($idLiderFuncional) {
         $this->idLiderFuncional = $idLiderFuncional;
 
         return $this;
@@ -158,11 +148,16 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      * @param integer $idTipoCodigo
      * @return $this
      */
-    public function setIdTipoCodigo($idTipoCodigo)
-    {
+    public function setIdTipoCodigo($idTipoCodigo) {
         $this->idTipoCodigo = $idTipoCodigo;
 
         return $this;
+    }
+
+    public function setIdModulo($idModulo) {
+        $this->idModulo = $idModulo;
+
+        return $idModulo;
     }
 
     /**
@@ -170,8 +165,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      *
      * @return integer
      */
-    public function getIdCodigo()
-    {
+    public function getIdCodigo() {
         return $this->idCodigo;
     }
 
@@ -180,8 +174,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getValorCodigo()
-    {
+    public function getValorCodigo() {
         return $this->valorCodigo;
     }
 
@@ -190,8 +183,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getDescripcionCodigo()
-    {
+    public function getDescripcionCodigo() {
         return $this->descripcionCodigo;
     }
 
@@ -200,8 +192,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getFechaRegistro()
-    {
+    public function getFechaRegistro() {
         return $this->fechaRegistro;
     }
 
@@ -210,8 +201,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getRequerimiento()
-    {
+    public function getRequerimiento() {
         return $this->requerimiento;
     }
 
@@ -220,8 +210,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      *
      * @return integer
      */
-    public function getIdLiderTecnico()
-    {
+    public function getIdLiderTecnico() {
         return $this->idLiderTecnico;
     }
 
@@ -230,8 +219,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      *
      * @return integer
      */
-    public function getIdLiderFuncional()
-    {
+    public function getIdLiderFuncional() {
         return $this->idLiderFuncional;
     }
 
@@ -240,21 +228,36 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      *
      * @return integer
      */
-    public function getIdTipoCodigo()
-    {
+    public function getIdTipoCodigo() {
         return $this->idTipoCodigo;
+    }
+
+    public function getIdModulo() {
+        return $this->idModulo;
     }
 
     /**
      * Initialize method for model.
      */
-    public function initialize()
-    {
+    public function initialize() {
         $this->setSchema("manco");
         $this->setSource("catalogo_codigo");
-        $this->belongsTo('idLiderTecnico', '\Persona', 'idpersona', ['alias' => 'Persona']);
-        $this->belongsTo('idLiderFuncional', '\Persona', 'idpersona', ['alias' => 'Persona']);
-        $this->belongsTo('idTipoCodigo', '\Tipocodigo', 'idTipoCodigo', ['alias' => 'Tipocodigo']);
+        $this->belongsTo('idLiderTecnico',
+                         '\Persona',
+                         'idpersona',
+                         ['alias' => 'Persona']);
+        $this->belongsTo('idLiderFuncional',
+                         '\Persona',
+                         'idpersona',
+                         ['alias' => 'Persona']);
+        $this->belongsTo('idTipoCodigo',
+                         '\Tipocodigo',
+                         'idTipoCodigo',
+                         ['alias' => 'Tipocodigo']);
+        $this->belongsTo('idModulo',
+                         '\Modulo',
+                         'idModulo',
+                         ['alias' => 'Modulo']);
     }
 
     /**
@@ -263,8 +266,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return CatalogoCodigo[]|CatalogoCodigo|\Phalcon\Mvc\Model\ResultSetInterface
      */
-    public static function find($parameters = null)
-    {
+    public static function find($parameters = null) {
         return parent::find($parameters);
     }
 
@@ -274,8 +276,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return CatalogoCodigo|\Phalcon\Mvc\Model\ResultInterface
      */
-    public static function findFirst($parameters = null)
-    {
+    public static function findFirst($parameters = null) {
         return parent::findFirst($parameters);
     }
 
@@ -285,17 +286,17 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      *
      * @return array
      */
-    public function columnMap()
-    {
+    public function columnMap() {
         return [
-            'idCodigo' => 'idCodigo',
-            'valorCodigo' => 'valorCodigo',
-            'descripcionCodigo' => 'descripcionCodigo',
-            'fechaRegistro' => 'fechaRegistro',
-            'Requerimiento' => 'Requerimiento',
-            'idLiderTecnico' => 'idLiderTecnico',
-            'idLiderFuncional' => 'idLiderFuncional',
-            'idTipoCodigo' => 'idTipoCodigo'
+                        'idCodigo' => 'idCodigo',
+                        'valorCodigo' => 'valorCodigo',
+                        'descripcionCodigo' => 'descripcionCodigo',
+                        'fechaRegistro' => 'fechaRegistro',
+                        'Requerimiento' => 'Requerimiento',
+                        'idLiderTecnico' => 'idLiderTecnico',
+                        'idLiderFuncional' => 'idLiderFuncional',
+                        'idTipoCodigo' => 'idTipoCodigo',
+                        'idModulo' => 'idModulo'
         ];
     }
 
@@ -304,9 +305,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
+    public function getSource() {
         return 'catalogo_codigo';
     }
-
 }

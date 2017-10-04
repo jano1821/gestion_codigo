@@ -11,6 +11,7 @@ class CargoController extends ControllerBase
      */
     public function indexAction()
     {
+        parent::validarSession();
         $this->persistent->parameters = null;
     }
 

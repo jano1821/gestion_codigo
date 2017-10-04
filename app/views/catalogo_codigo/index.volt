@@ -28,7 +28,7 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-2">
-                        <label for="fieldDescripcioncodigo" class="control-label">Descripcion del Código</label>
+                        <label for="fieldDescripcioncodigo" class="control-label">Descripción del Código</label>
                     </div>
                     <div class="col-md-4">
                         {{ text_field("descripcionCodigo", "size" : 200, "class" : "form-control", "id" : "fieldDescripcioncodigo") }}
@@ -74,7 +74,7 @@
                     </div>
                     <div class="col-md-3">
                         {% if liderFuncional is defined %}
-                            {{ select("idLiderFuncional", liderFuncional, liderTecnico,'useEmpty': true, 'emptyText': 'Seleccione un Líder Funcional...', 'emptyValue': '', 'using': ['idpersona', 'nombrePersona'], "class" : "form-control") }}
+                            {{ select("idLiderFuncional", liderFuncional,'useEmpty': true, 'emptyText': 'Seleccione un Líder Funcional...', 'emptyValue': '', 'using': ['idpersona', 'nombrePersona'], "class" : "form-control") }}
                         {% endif %}
                     </div>
                 </div>

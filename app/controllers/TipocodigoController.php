@@ -11,6 +11,7 @@ class TipocodigoController extends ControllerBase
      */
     public function indexAction()
     {
+        parent::validarSession();
         $this->persistent->parameters = null;
     }
 
@@ -21,7 +22,7 @@ class TipocodigoController extends ControllerBase
     {
         $numberPage = 1;
         if ($this->request->isPost()) {
-            $query = Criteria::fromInput($this->di, 'Tipocodigo', $_POST);
+            $query = Parent::fromInput($this->di, 'Tipocodigo', $_POST);
             $this->persistent->parameters = $query->getParams();
         } else {
             $numberPage = $this->request->getQuery("page", "int");
@@ -35,7 +36,7 @@ class TipocodigoController extends ControllerBase
 
         $tipocodigo = Tipocodigo::find($parameters);
         if (count($tipocodigo) == 0) {
-            $this->flash->notice("The search did not find any tipocodigo");
+            $this->flash->notice("No se Obtuvieron Resultados en la Búsqueda");
 
             $this->dispatcher->forward([
                 "controller" => "tipocodigo",
@@ -87,6 +88,7 @@ class TipocodigoController extends ControllerBase
 
             $this->tag->setDefault("idTipoCodigo", $tipocodigo->idTipoCodigo);
             $this->tag->setDefault("descripcionTipo", $tipocodigo->descripcionTipo);
+            $this->tag->setDefault("longitudCodigo", $tipocodigo->longitudCodigo);
             $this->tag->setDefault("estadoRegistro", $tipocodigo->estadoRegistro);
             
         }
@@ -109,6 +111,7 @@ class TipocodigoController extends ControllerBase
         $tipocodigo = new Tipocodigo();
         $tipocodigo->Descripciontipo = $this->request->getPost("descripcionTipo");
         $tipocodigo->Estadoregistro = $this->request->getPost("estadoRegistro");
+        $tipocodigo->LongitudCodigo = $this->request->getPost("longitudCodigo");
         
 
         if (!$tipocodigo->save()) {
@@ -124,7 +127,7 @@ class TipocodigoController extends ControllerBase
             return;
         }
 
-        $this->flash->success("tipocodigo was created successfully");
+        $this->flash->success("Tipo de Código se Registró Satisfactoriamente");
 
         $this->dispatcher->forward([
             'controller' => "tipocodigo",
@@ -163,6 +166,7 @@ class TipocodigoController extends ControllerBase
         }
 
         $tipocodigo->Descripciontipo = $this->request->getPost("descripcionTipo");
+        $tipocodigo->LongitudCodigo = $this->request->getPost("longitudCodigo");
         $tipocodigo->Estadoregistro = $this->request->getPost("estadoRegistro");
         
 
@@ -181,7 +185,7 @@ class TipocodigoController extends ControllerBase
             return;
         }
 
-        $this->flash->success("tipocodigo was updated successfully");
+        $this->flash->success("Tipo de código se Actualizó Satisfactoriamente");
 
         $this->dispatcher->forward([
             'controller' => "tipocodigo",

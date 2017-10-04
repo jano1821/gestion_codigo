@@ -5,7 +5,7 @@
 	    <div class="btn-group pull-right">
                 <?= $this->tag->linkTo(['catalogo_codigo/index', '<i class=\'glyphicon glyphicon-chevron-left\'></i> Volver', 'class' => 'btn btn-info']) ?>
             </div>
-            <h4><i class='glyphicon glyphicon-record'></i> Registrar Nuevo codigo</h4>
+            <h4><i class='glyphicon glyphicon-record'></i> Registrar Nuevo Código</h4>
 	</div>
         <div class="page-header">
         </div>
@@ -29,7 +29,7 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-2">
-                        <label for="fieldDescripcioncodigo" class="control-label">Descripcion</label>
+                        <label for="fieldDescripcioncodigo" class="control-label">Descripción del Código</label>
                     </div>
                     <div class="col-md-4">
                         <?= $this->tag->textField(['descripcionCodigo', 'size' => 200, 'class' => 'form-control', 'id' => 'fieldDescripcioncodigo']) ?>
@@ -88,7 +88,7 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-2">
-                        <label for="fieldIdtipocodigo" class="control-label">Tipo Codigo</label>
+                        <label for="fieldIdtipocodigo" class="control-label">Tipo de Código</label>
                     </div>
                     <div class="col-md-3">
                         <?php if (isset($tipoCodigo)) { ?>
@@ -104,7 +104,7 @@
                     <div class="col-md-2">
                     </div>
                     <div class="col-md-2">
-                        <?= $this->tag->submitButton(['Guardar', 'class' => 'btn btn-primary']) ?>
+                        <?= $this->tag->submitButton(['Guardar', 'class' => 'col-sm-10 btn btn-primary']) ?>
                     </div>
                 </div>
             </div>

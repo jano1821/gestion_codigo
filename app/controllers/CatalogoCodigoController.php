@@ -7,22 +7,23 @@ class CatalogoCodigoController extends ControllerBase {
      * Index action
      */
     public function indexAction() {
-        $queryTipoCodigo = parent::fromInput( $this->di,
-                                    'Tipocodigo',
-                                    ['estadoRegistro' => 'S']
-                                    );
+        parent::validarSession();
+        $queryTipoCodigo = parent::fromInput($this->di,
+                                             'Tipocodigo',
+                                             ['estadoRegistro' => 'S']
+        );
         $tipocodigo = $queryTipoCodigo->getParams();
-        
+
         if ($tipocodigo) {
             $tipocodigo = Tipocodigo::find($this->persistent->tipoCodigo);
-        }else{
+        }else {
             $tipocodigo = array();
         }
-        
+
         $liderTecnico = Persona::find($this->persistent->liderTecnico);
-        
+
         $liderFuncional = Persona::find($this->persistent->liderFuncional);
-        
+
         $this->view->tipoCodigo = $tipocodigo;
         $this->view->liderTecnico = $liderTecnico;
         $this->view->liderFuncional = $liderFuncional;
@@ -37,17 +38,20 @@ class CatalogoCodigoController extends ControllerBase {
         $nombreLiderTecnico = '';
         $nombreLiderFuncional = '';
         if ($this->request->isPost()) {
-            $query = parent::fromInput($this->di,'CatalogoCodigo',$_POST);
+            $query = parent::fromInput($this->di,
+                                       'CatalogoCodigo',
+                                       $_POST);
             $this->persistent->parameters = $query->getParams();
         }else {
-            $numberPage = $this->request->getQuery("page","int");
+            $numberPage = $this->request->getQuery("page",
+                                                   "int");
         }
 
         $parameters = $this->persistent->parameters;
         if (!is_array($parameters)) {
             $parameters = [];
         }
-        $parameters["order"] = "idCodigo";
+        $parameters["order"] = "idCodigo desc";
 
         $catalogo_codigo = CatalogoCodigo::find($parameters);
         if (count($catalogo_codigo) == 0) {
@@ -59,13 +63,13 @@ class CatalogoCodigoController extends ControllerBase {
             ]);
 
             return;
-        }else{
+        }else {
             $listBeanCatalogoCodigo = array();
             foreach ($catalogo_codigo as $codigo) {
                 $beanCatalogoCodigo = new BeanCatalogoCodigo();
-                
+
                 $date = new DateTime($codigo->getFechaRegistro());
-                
+
                 $beanCatalogoCodigo->setIdCodigo($codigo->getIdCodigo());
                 $beanCatalogoCodigo->setValorCodigo($codigo->getValorCodigo());
                 $beanCatalogoCodigo->setDescripcionCodigo($codigo->getDescripcionCodigo());
@@ -74,28 +78,29 @@ class CatalogoCodigoController extends ControllerBase {
                 $beanCatalogoCodigo->setIdLiderTecnico($codigo->getIdLiderTecnico());
                 $beanCatalogoCodigo->setIdLiderFuncional($codigo->getIdLiderFuncional());
                 $beanCatalogoCodigo->setIdTipoCodigo($codigo->getIdTipoCodigo());
-                
+
                 $tipocodigo = Tipocodigo::find($codigo->getIdTipoCodigo());
                 foreach ($tipocodigo as $tupla) {
                     $descripcion = $tupla->getDescripcionTipo();
                 }
                 $beanCatalogoCodigo->setDescripcionTipoProducto($descripcion);
-                
+
                 $liderTecnico = Persona::find($codigo->getIdLiderTecnico());
                 foreach ($liderTecnico as $tupla) {
                     $nombreLiderTecnico = $tupla->getNombrePersona();
                 }
-                
+
                 $beanCatalogoCodigo->setNombreLiderTecnico($nombreLiderTecnico);
-                
+
                 $liderFuncional = Persona::find($codigo->getIdLiderFuncional());
                 foreach ($liderFuncional as $tupla) {
                     $nombreLiderFuncional = $tupla->getNombrePersona();
                 }
-                
+
                 $beanCatalogoCodigo->setNombreLiderfuncional($nombreLiderFuncional);
-                
-                array_push($listBeanCatalogoCodigo,$beanCatalogoCodigo);
+
+                array_push($listBeanCatalogoCodigo,
+                           $beanCatalogoCodigo);
             }
         }
 
@@ -113,22 +118,22 @@ class CatalogoCodigoController extends ControllerBase {
      * Displays the creation form
      */
     public function newAction() {
-        $queryTipoCodigo = parent::fromInput( $this->di,
-                                    'Tipocodigo',
-                                    ['estadoRegistro' => 'S']
-                                    );
+        $queryTipoCodigo = parent::fromInput($this->di,
+                                             'Tipocodigo',
+                                             ['estadoRegistro' => 'S']
+        );
         $tipocodigo = $queryTipoCodigo->getParams();
-        
+
         if ($tipocodigo) {
             $tipocodigo = Tipocodigo::find($this->persistent->tipoCodigo);
-        }else{
+        }else {
             $tipocodigo = array();
         }
-        
+
         $liderTecnico = Persona::find($this->persistent->liderTecnico);
-        
+
         $liderFuncional = Persona::find($this->persistent->liderFuncional);
-        
+
         $this->view->tipoCodigo = $tipocodigo;
         $this->view->liderTecnico = $liderTecnico;
         $this->view->liderFuncional = $liderFuncional;
@@ -144,7 +149,7 @@ class CatalogoCodigoController extends ControllerBase {
 
             $catalogo_codigo = CatalogoCodigo::findFirstByidCodigo($idCodigo);
             if (!$catalogo_codigo) {
-                $this->flash->error("catalogo_codigo was not found");
+                $this->flash->error("Codigo no Encontrado");
 
                 $this->dispatcher->forward([
                                 'controller' => "catalogo_codigo",
@@ -154,15 +159,15 @@ class CatalogoCodigoController extends ControllerBase {
                 return;
             }
 
-            $queryTipoCodigo = parent::fromInput( $this->di,
-                                    'Tipocodigo',
-                                    ['estadoRegistro' => 'S']
-                                    );
+            $queryTipoCodigo = parent::fromInput($this->di,
+                                                 'Tipocodigo',
+                                                 ['estadoRegistro' => 'S']
+            );
             $tipocodigo = $queryTipoCodigo->getParams();
 
             if ($tipocodigo) {
                 $tipocodigo = Tipocodigo::find($this->persistent->tipoCodigo);
-            }else{
+            }else {
                 $tipocodigo = array();
             }
 
@@ -173,7 +178,7 @@ class CatalogoCodigoController extends ControllerBase {
             $this->view->tipoCodigo = $tipocodigo;
             $this->view->liderTecnico = $liderTecnico;
             $this->view->liderFuncional = $liderFuncional;
-            
+
             $this->view->idCodigo = $catalogo_codigo->idCodigo;
 
             $this->tag->setDefault("idCodigo",
@@ -183,7 +188,8 @@ class CatalogoCodigoController extends ControllerBase {
             $this->tag->setDefault("descripcionCodigo",
                                    $catalogo_codigo->descripcionCodigo);
             $this->tag->setDefault("fechaRegistro",
-                                   date_format(new DateTime($catalogo_codigo->fechaRegistro), 'Y-m-d'));
+                                   date_format(new DateTime($catalogo_codigo->fechaRegistro),
+                                                            'Y-m-d'));
             $this->tag->setDefault("Requerimiento",
                                    $catalogo_codigo->Requerimiento);
             $this->tag->setDefault("idLiderTecnico",
@@ -231,7 +237,7 @@ class CatalogoCodigoController extends ControllerBase {
             return;
         }
 
-        $this->flash->success("catalogo_codigo was created successfully");
+        $this->flash->success("Código Registrado Satisfactoriamente");
 
         $this->dispatcher->forward([
                         'controller' => "catalogo_codigo",

@@ -29,7 +29,7 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-2">
-                        <label for="fieldDescripcioncodigo" class="control-label">Descripcion</label>
+                        <label for="fieldDescripcioncodigo" class="control-label">Descripción del Código</label>
                     </div>
                     <div class="col-md-4">
                         {{ text_field("descripcionCodigo", "size" : 200, "class" : "form-control", "id" : "fieldDescripcioncodigo") }}
@@ -88,7 +88,7 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-2">
-                        <label for="fieldIdtipocodigo" class="control-label">Tipo Codigo</label>
+                        <label for="fieldIdtipocodigo" class="control-label">Tipo de Código</label>
                     </div>
                     <div class="col-md-3">
                         {% if tipoCodigo is defined %}
@@ -104,7 +104,7 @@
                     <div class="col-md-2">
                     </div>
                     <div class="col-md-2">
-                        {{ submit_button('Guardar', 'class': 'btn btn-primary') }}
+                        {{ submit_button('Guardar', 'class': 'col-sm-10 btn btn-primary') }}
                     </div>
                 </div>
             </div>

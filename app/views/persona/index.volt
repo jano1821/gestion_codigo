@@ -1,42 +1,66 @@
-<div class="page-header">
-    <h1>
-        Search persona
-    </h1>
-    <p>
-        {{ link_to("persona/new", "Create persona") }}
-    </p>
-</div>
+<div class="row">
+    <div class="container">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+	    <div class="btn-group pull-right">
+                {{ link_to("menu/index", "<i class='glyphicon glyphicon-chevron-left'></i> Volver","class":"btn btn-info") }}
+                {{ link_to("persona/new", "<i class='glyphicon glyphicon-plus'></i> Nueva Persona","class":"btn btn-info") }}
+            </div>
+            <h4><i class='glyphicon glyphicon-search'></i> Búsqueda de Personas</h4>
+	</div>
+        <div class="page-header">
+        </div>
 
-{{ content() }}
+    {{ content() }}
 
-{{ form("persona/search", "method":"post", "autocomplete" : "off", "class" : "form-horizontal") }}
+    {{ form("persona/search", "method":"post", "autocomplete" : "off", "class" : "form-horizontal") }}
 
-<div class="form-group">
-    <label for="fieldIdpersona" class="col-sm-2 control-label">Idpersona</label>
-    <div class="col-sm-10">
-        {{ text_field("idpersona", "type" : "numeric", "class" : "form-control", "id" : "fieldIdpersona") }}
+    <div class="table">
+        <div class="form-group">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-2">
+                <label for="fieldIdpersona" class="control-label">Id Persona</label>
+            </div>
+            <div class="col-md-2">
+                {{ text_field("idpersona", "type" : "numeric", "class" : "form-control", "id" : "fieldIdpersona") }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-2">
+                <label for="fieldNombrepersona" class="control-label">Nombre Persona</label>
+            </div>
+            <div class="col-md-4">
+                {{ text_field("nombrePersona", "size" : 30, "class" : "form-control", "id" : "fieldNombrepersona") }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-2">
+                <label for="fieldIdcargo" class="control-label">Cargo</label>
+            </div>
+            <div class="col-md-3">
+                {% if cargo is defined %}
+                    {{ select("idCargo", cargo,'useEmpty': true, 'emptyText': 'Seleccione Cargo...', 'emptyValue': '', 'using': ['idCargo', 'descripcionCargo'], "class" : "form-control") }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+                {{ submit_button('Buscar', 'class': 'col-sm-10 btn btn-primary') }}
+            </div>
+        </div>
+    </div>
+    </form>
     </div>
 </div>
-
-<div class="form-group">
-    <label for="fieldNombrepersona" class="col-sm-2 control-label">NombrePersona</label>
-    <div class="col-sm-10">
-        {{ text_field("nombrePersona", "size" : 30, "class" : "form-control", "id" : "fieldNombrepersona") }}
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="fieldIdcargo" class="col-sm-2 control-label">IdCargo</label>
-    <div class="col-sm-10">
-        {{ text_field("idCargo", "type" : "numeric", "class" : "form-control", "id" : "fieldIdcargo") }}
-    </div>
-</div>
-
-
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        {{ submit_button('Search', 'class': 'btn btn-default') }}
-    </div>
-</div>
-
-</form>

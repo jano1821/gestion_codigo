@@ -1,46 +1,45 @@
 <div class="row">
-    <nav>
-        <ul class="pager">
-            <li class="previous">{{ link_to("persona/index", "Go Back") }}</li>
-            <li class="next">{{ link_to("persona/new", "Create ") }}</li>
-        </ul>
-    </nav>
-</div>
+    <div class="container">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+	    <div class="btn-group pull-right">
+                {{ link_to("persona/index", "<i class='glyphicon glyphicon-chevron-left'></i> Volver","class":"btn btn-info") }}
+                {{ link_to("persona/new", "<i class='glyphicon glyphicon-plus'></i> Nueva Persona","class":"btn btn-info") }}
+       </div>
+            <h4><i class='glyphicon glyphicon-search'></i> Resultado de Busqueda</h4>
+	</div>
+            <div class="page-header">
+            </div>
 
-<div class="page-header">
-    <h1>Search result</h1>
-</div>
+    {{ content() }}
 
-{{ content() }}
-
-<div class="row">
-    <table class="table table-bordered">
-        <thead>
+    <div class="table-responsive">
+        <table class="table">
             <tr>
-                <th>Idpersona</th>
-            <th>NombrePersona</th>
-            <th>IdCargo</th>
+                <th>Id Persona</th>
+                <th>Nombre Persona</th>
+                <th>Cargo</th>
 
                 <th></th>
                 <th></th>
             </tr>
-        </thead>
         <tbody>
         {% if page.items is defined %}
-        {% for persona in page.items %}
+        {% for beanPersona in listBeanPersona %}
             <tr>
-                <td>{{ persona.idpersona }}</td>
-            <td>{{ persona.nombrePersona }}</td>
-            <td>{{ persona.idCargo }}</td>
+                <td>{{ beanPersona.getIdpersona() }}</td>
+                <td>{{ beanPersona.getNombrePersona() }}</td>
+                <td>{{ beanPersona.getDescripcionCargo() }}</td>
 
-                <td>{{ link_to("persona/edit/"~persona.idpersona, "Edit") }}</td>
-                <td>{{ link_to("persona/delete/"~persona.idpersona, "Delete") }}</td>
+                <td>{{ link_to("persona/edit/"~beanPersona.getIdpersona(), "<i class='glyphicon glyphicon-edit'></i>","class":"btn btn-default") }}</td>
+                <td>{{ link_to("persona/delete/"~beanPersona.getIdpersona(), "<i class='glyphicon glyphicon-trash'></i>","class":"btn btn-default") }}</td>
+                            
             </tr>
         {% endfor %}
         {% endif %}
         </tbody>
-    </table>
-</div>
+                </table>
+            </div>
 
 <div class="row">
     <div class="col-sm-1">
@@ -51,11 +50,15 @@
     <div class="col-sm-11">
         <nav>
             <ul class="pagination">
-                <li>{{ link_to("persona/search", "First") }}</li>
-                <li>{{ link_to("persona/search?page="~page.before, "Previous") }}</li>
-                <li>{{ link_to("persona/search?page="~page.next, "Next") }}</li>
-                <li>{{ link_to("persona/search?page="~page.last, "Last") }}</li>
+                <li>{{ link_to("persona/search", "Primero") }}</li>
+                <li>{{ link_to("persona/search?page="~page.before, "Anterior") }}</li>
+                <li>{{ link_to("persona/search?page="~page.next, "Siguiente") }}</li>
+                <li>{{ link_to("persona/search?page="~page.last, "Ultimo") }}</li>
             </ul>
-        </nav>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>

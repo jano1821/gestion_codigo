@@ -1,30 +1,30 @@
 <?php
- 
+
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
+class PersonaController extends ControllerBase {
 
+    public function indexAction() {
+        parent::validarSession();
 
-class PersonaController extends ControllerBase
-{
-    /**
-     * Index action
-     */
-    public function indexAction()
-    {
-        $this->persistent->parameters = null;
+        $cargo = Cargo::find();
+
+        $this->view->cargo = $cargo;
     }
 
     /**
      * Searches for persona
      */
-    public function searchAction()
-    {
+    public function searchAction() {
         $numberPage = 1;
         if ($this->request->isPost()) {
-            $query = Criteria::fromInput($this->di, 'Persona', $_POST);
+            $query = Criteria::fromInput($this->di,
+                                         'Persona',
+                                         $_POST);
             $this->persistent->parameters = $query->getParams();
-        } else {
-            $numberPage = $this->request->getQuery("page", "int");
+        }else {
+            $numberPage = $this->request->getQuery("page",
+                                                   "int");
         }
 
         $parameters = $this->persistent->parameters;
@@ -35,31 +35,49 @@ class PersonaController extends ControllerBase
 
         $persona = Persona::find($parameters);
         if (count($persona) == 0) {
-            $this->flash->notice("The search did not find any persona");
+            $this->flash->notice("No se encontraron Resultados para esta Búsqueda");
 
             $this->dispatcher->forward([
-                "controller" => "persona",
-                "action" => "index"
+                            "controller" => "persona",
+                            "action" => "index"
             ]);
 
             return;
+        }else{
+            $listBeanPersona = array();
+            foreach ($persona as $valores) {
+                $beanPersona = new BeanPersona();
+                
+                $beanPersona->setIdCargo($valores->getIdCargo());
+                $beanPersona->setIdpersona($valores->getIdpersona());
+                $beanPersona->setNombrePersona($valores->getNombrePersona());
+                $cargo = Cargo::find($valores->getIdCargo());
+                foreach ($cargo as $tupla) {
+                    $descripcion = $tupla->getDescripcionCargo();
+                }
+                $beanPersona->setDescripcionCargo($descripcion);
+                
+                array_push($listBeanPersona,$beanPersona);
+            }
         }
 
         $paginator = new Paginator([
-            'data' => $persona,
-            'limit'=> 10,
-            'page' => $numberPage
+                        'data' => $persona,
+                        'limit' => 10,
+                        'page' => $numberPage
         ]);
 
         $this->view->page = $paginator->getPaginate();
+        $this->view->listBeanPersona = $listBeanPersona;
     }
 
     /**
      * Displays the creation form
      */
-    public function newAction()
-    {
-
+    public function newAction() {
+        $cargo = Cargo::find();
+        
+        $this->view->cargo = $cargo;
     }
 
     /**
@@ -67,8 +85,7 @@ class PersonaController extends ControllerBase
      *
      * @param string $idpersona
      */
-    public function editAction($idpersona)
-    {
+    public function editAction($idpersona) {
         if (!$this->request->isPost()) {
 
             $persona = Persona::findFirstByidpersona($idpersona);
@@ -76,31 +93,36 @@ class PersonaController extends ControllerBase
                 $this->flash->error("persona was not found");
 
                 $this->dispatcher->forward([
-                    'controller' => "persona",
-                    'action' => 'index'
+                                'controller' => "persona",
+                                'action' => 'index'
                 ]);
 
                 return;
             }
+            
+            $cargo = Cargo::find();
+
+            $this->view->cargo = $cargo;
 
             $this->view->idpersona = $persona->idpersona;
 
-            $this->tag->setDefault("idpersona", $persona->idpersona);
-            $this->tag->setDefault("nombrePersona", $persona->nombrePersona);
-            $this->tag->setDefault("idCargo", $persona->idCargo);
-            
+            $this->tag->setDefault("idpersona",
+                                   $persona->idpersona);
+            $this->tag->setDefault("nombrePersona",
+                                   $persona->nombrePersona);
+            $this->tag->setDefault("idCargo",
+                                   $persona->idCargo);
         }
     }
 
     /**
      * Creates a new persona
      */
-    public function createAction()
-    {
+    public function createAction() {
         if (!$this->request->isPost()) {
             $this->dispatcher->forward([
-                'controller' => "persona",
-                'action' => 'index'
+                            'controller' => "persona",
+                            'action' => 'index'
             ]);
 
             return;
@@ -109,7 +131,7 @@ class PersonaController extends ControllerBase
         $persona = new Persona();
         $persona->Nombrepersona = $this->request->getPost("nombrePersona");
         $persona->Idcargo = $this->request->getPost("idCargo");
-        
+
 
         if (!$persona->save()) {
             foreach ($persona->getMessages() as $message) {
@@ -117,8 +139,8 @@ class PersonaController extends ControllerBase
             }
 
             $this->dispatcher->forward([
-                'controller' => "persona",
-                'action' => 'new'
+                            'controller' => "persona",
+                            'action' => 'new'
             ]);
 
             return;
@@ -127,8 +149,8 @@ class PersonaController extends ControllerBase
         $this->flash->success("persona was created successfully");
 
         $this->dispatcher->forward([
-            'controller' => "persona",
-            'action' => 'index'
+                        'controller' => "persona",
+                        'action' => 'index'
         ]);
     }
 
@@ -136,13 +158,12 @@ class PersonaController extends ControllerBase
      * Saves a persona edited
      *
      */
-    public function saveAction()
-    {
+    public function saveAction() {
 
         if (!$this->request->isPost()) {
             $this->dispatcher->forward([
-                'controller' => "persona",
-                'action' => 'index'
+                            'controller' => "persona",
+                            'action' => 'index'
             ]);
 
             return;
@@ -155,8 +176,8 @@ class PersonaController extends ControllerBase
             $this->flash->error("persona does not exist " . $idpersona);
 
             $this->dispatcher->forward([
-                'controller' => "persona",
-                'action' => 'index'
+                            'controller' => "persona",
+                            'action' => 'index'
             ]);
 
             return;
@@ -164,7 +185,7 @@ class PersonaController extends ControllerBase
 
         $persona->Nombrepersona = $this->request->getPost("nombrePersona");
         $persona->Idcargo = $this->request->getPost("idCargo");
-        
+
 
         if (!$persona->save()) {
 
@@ -173,9 +194,9 @@ class PersonaController extends ControllerBase
             }
 
             $this->dispatcher->forward([
-                'controller' => "persona",
-                'action' => 'edit',
-                'params' => [$persona->idpersona]
+                            'controller' => "persona",
+                            'action' => 'edit',
+                            'params' => [$persona->idpersona]
             ]);
 
             return;
@@ -184,8 +205,8 @@ class PersonaController extends ControllerBase
         $this->flash->success("persona was updated successfully");
 
         $this->dispatcher->forward([
-            'controller' => "persona",
-            'action' => 'index'
+                        'controller' => "persona",
+                        'action' => 'index'
         ]);
     }
 
@@ -194,15 +215,14 @@ class PersonaController extends ControllerBase
      *
      * @param string $idpersona
      */
-    public function deleteAction($idpersona)
-    {
+    public function deleteAction($idpersona) {
         $persona = Persona::findFirstByidpersona($idpersona);
         if (!$persona) {
             $this->flash->error("persona was not found");
 
             $this->dispatcher->forward([
-                'controller' => "persona",
-                'action' => 'index'
+                            'controller' => "persona",
+                            'action' => 'index'
             ]);
 
             return;
@@ -215,8 +235,8 @@ class PersonaController extends ControllerBase
             }
 
             $this->dispatcher->forward([
-                'controller' => "persona",
-                'action' => 'search'
+                            'controller' => "persona",
+                            'action' => 'search'
             ]);
 
             return;
@@ -225,9 +245,8 @@ class PersonaController extends ControllerBase
         $this->flash->success("persona was deleted successfully");
 
         $this->dispatcher->forward([
-            'controller' => "persona",
-            'action' => "index"
+                        'controller' => "persona",
+                        'action' => "index"
         ]);
     }
-
 }

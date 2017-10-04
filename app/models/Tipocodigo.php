@@ -1,8 +1,6 @@
 <?php
 
-class Tipocodigo extends \Phalcon\Mvc\Model
-{
-
+class Tipocodigo extends \Phalcon\Mvc\Model {
     /**
      *
      * @var integer
@@ -11,20 +9,24 @@ class Tipocodigo extends \Phalcon\Mvc\Model
      * @Column(type="integer", length=11, nullable=false)
      */
     public $idTipoCodigo;
-
     /**
      *
      * @var string
-     * @Column(type="string", length=200, nullable=true)
+     * @Column(type="string", length=200, nullable=false)
      */
     public $descripcionTipo;
-
     /**
      *
      * @var string
      * @Column(type="string", length=1, nullable=true)
      */
     public $estadoRegistro;
+    /**
+     *
+     * @var integer
+     * @column(type="integer", length=11, nullable=false)
+     */
+    public $longitudCodigo;
 
     /**
      * Method to set the value of field idTipoCodigo
@@ -32,8 +34,7 @@ class Tipocodigo extends \Phalcon\Mvc\Model
      * @param integer $idTipoCodigo
      * @return $this
      */
-    public function setIdTipoCodigo($idTipoCodigo)
-    {
+    public function setIdTipoCodigo($idTipoCodigo) {
         $this->idTipoCodigo = $idTipoCodigo;
 
         return $this;
@@ -45,8 +46,7 @@ class Tipocodigo extends \Phalcon\Mvc\Model
      * @param string $descripcionTipo
      * @return $this
      */
-    public function setDescripcionTipo($descripcionTipo)
-    {
+    public function setDescripcionTipo($descripcionTipo) {
         $this->descripcionTipo = $descripcionTipo;
 
         return $this;
@@ -58,9 +58,14 @@ class Tipocodigo extends \Phalcon\Mvc\Model
      * @param string $estadoRegistro
      * @return $this
      */
-    public function setEstadoRegistro($estadoRegistro)
-    {
+    public function setEstadoRegistro($estadoRegistro) {
         $this->estadoRegistro = $estadoRegistro;
+
+        return $this;
+    }
+
+    public function setLongitudCodigo($longitudCodigo) {
+        $this->longitudCodigo = $longitudCodigo;
 
         return $this;
     }
@@ -70,8 +75,7 @@ class Tipocodigo extends \Phalcon\Mvc\Model
      *
      * @return integer
      */
-    public function getIdTipoCodigo()
-    {
+    public function getIdTipoCodigo() {
         return $this->idTipoCodigo;
     }
 
@@ -80,8 +84,7 @@ class Tipocodigo extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getDescripcionTipo()
-    {
+    public function getDescripcionTipo() {
         return $this->descripcionTipo;
     }
 
@@ -90,19 +93,24 @@ class Tipocodigo extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getEstadoRegistro()
-    {
+    public function getEstadoRegistro() {
         return $this->estadoRegistro;
+    }
+
+    public function getLongitudCodigo() {
+        return $this->longitudCodigo;
     }
 
     /**
      * Initialize method for model.
      */
-    public function initialize()
-    {
+    public function initialize() {
         $this->setSchema("manco");
         $this->setSource("tipocodigo");
-        $this->hasMany('idTipoCodigo', 'CatalogoCodigo', 'idTipoCodigo', ['alias' => 'CatalogoCodigo']);
+        $this->hasMany('idTipoCodigo',
+                       'CatalogoCodigo',
+                       'idTipoCodigo',
+                       ['alias' => 'CatalogoCodigo']);
     }
 
     /**
@@ -111,8 +119,7 @@ class Tipocodigo extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Tipocodigo[]|Tipocodigo|\Phalcon\Mvc\Model\ResultSetInterface
      */
-    public static function find($parameters = null)
-    {
+    public static function find($parameters = null) {
         return parent::find($parameters);
     }
 
@@ -122,8 +129,7 @@ class Tipocodigo extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Tipocodigo|\Phalcon\Mvc\Model\ResultInterface
      */
-    public static function findFirst($parameters = null)
-    {
+    public static function findFirst($parameters = null) {
         return parent::findFirst($parameters);
     }
 
@@ -133,12 +139,12 @@ class Tipocodigo extends \Phalcon\Mvc\Model
      *
      * @return array
      */
-    public function columnMap()
-    {
+    public function columnMap() {
         return [
-            'idTipoCodigo' => 'idTipoCodigo',
-            'descripcionTipo' => 'descripcionTipo',
-            'estadoRegistro' => 'estadoRegistro'
+                        'idTipoCodigo' => 'idTipoCodigo',
+                        'descripcionTipo' => 'descripcionTipo',
+                        'estadoRegistro' => 'estadoRegistro',
+                        'longitudCodigo' => 'longitudCodigo'
         ];
     }
 
@@ -147,9 +153,7 @@ class Tipocodigo extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getSource()
-    {
+    public function getSource() {
         return 'tipocodigo';
     }
-
 }

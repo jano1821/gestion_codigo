@@ -28,7 +28,7 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-2">
-                        <label for="fieldDescripcioncodigo" class="control-label">Descripcion del Código</label>
+                        <label for="fieldDescripcioncodigo" class="control-label">Descripción del Código</label>
                     </div>
                     <div class="col-md-4">
                         <?= $this->tag->textField(['descripcionCodigo', 'size' => 200, 'class' => 'form-control', 'id' => 'fieldDescripcioncodigo']) ?>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="col-md-3">
                         <?php if (isset($liderFuncional)) { ?>
-                            <?= $this->tag->select(['idLiderFuncional', $liderFuncional, $liderTecnico, 'useEmpty' => true, 'emptyText' => 'Seleccione un Líder Funcional...', 'emptyValue' => '', 'using' => ['idpersona', 'nombrePersona'], 'class' => 'form-control']) ?>
+                            <?= $this->tag->select(['idLiderFuncional', $liderFuncional, 'useEmpty' => true, 'emptyText' => 'Seleccione un Líder Funcional...', 'emptyValue' => '', 'using' => ['idpersona', 'nombrePersona'], 'class' => 'form-control']) ?>
                         <?php } ?>
                     </div>
                 </div>
