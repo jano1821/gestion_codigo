@@ -45,7 +45,7 @@
     <label for="fieldEstadoregistro" class="control-label">Estado de Registro</label>
 </div>
                     <div class="col-md-2">
-        {{ select_static('estadoRegistro', [ '':'Seleccione Tipo...', 'S' : 'Activo', 'N' : 'Inactivo'], "class": "form-control") }}
+        {{ select_static('estadoRegistro', [ '':'Seleccione Estado...', 'S' : 'Activo', 'N' : 'Inactivo'], "class": "form-control") }}
     </div>
 </div>
 

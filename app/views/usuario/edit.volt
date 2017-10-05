@@ -21,7 +21,7 @@
 <div class="col-md-2">
     <label for="fieldUsername" class="control-label">Nombre de Usuario</label>
 </div>
-<div class="col-md-3">
+<div class="col-md-2">
         {{ text_field("userName", "size" : 30, "class" : "form-control", "id" : "fieldUsername") }}
     </div>
 </div>
@@ -33,7 +33,7 @@
     <label for="fieldPassword" class="control-label">Password</label>
 </div>
 <div class="col-md-3">
-        {{ text_field("password", "size" : 30, "class" : "form-control", "id" : "fieldPassword") }}
+        {{ password_field("password", "size" : 30, "class" : "form-control", "id" : "fieldPassword") }}
     </div>
 </div>
 
@@ -44,7 +44,7 @@
     <label for="fieldEstadoregistro" class="control-label">Estado de Registro</label>
 </div>
 <div class="col-md-3">
-        {{ text_field("estadoRegistro", "size" : 30, "class" : "form-control", "id" : "fieldEstadoregistro") }}
+        {{ select_static('estadoRegistro', [ '':'Seleccione Usuario...', 'S' : 'Activo', 'N' : 'Inactivo'], "class": "form-control") }}
     </div>
 </div>
 

@@ -26,15 +26,15 @@
             </tr>
         <tbody>
         <?php if (isset($page->items)) { ?>
-        <?php foreach ($page->items as $usuario) { ?>
+        <?php foreach ($listBeanUsuario as $BeanUsuario) { ?>
             <tr>
-                <td><?= $usuario->idUsuario ?></td>
-            <td><?= $usuario->userName ?></td>
-            <td><?= $usuario->password ?></td>
-            <td><?= $usuario->estadoRegistro ?></td>
+                <td><?= $BeanUsuario->getIdUsuario() ?></td>
+            <td><?= $BeanUsuario->getUserName() ?></td>
+            <td><?= $BeanUsuario->getPassword() ?></td>
+            <td><?= $BeanUsuario->getEstadoRegistro() ?></td>
 
-<td><?= $this->tag->linkTo(['usuario/edit/' . $usuario->idUsuario, '<i class=\'glyphicon glyphicon-edit\'></i>', 'class' => 'btn btn-default']) ?></td>
-<td><?= $this->tag->linkTo(['usuario/delete/' . $usuario->idUsuario, '<i class=\'glyphicon glyphicon-trash\'></i>', 'class' => 'btn btn-default']) ?></td>
+<td><?= $this->tag->linkTo(['usuario/edit/' . $BeanUsuario->getIdUsuario(), '<i class=\'glyphicon glyphicon-edit\'></i>', 'class' => 'btn btn-default']) ?></td>
+<td><?= $this->tag->linkTo(['usuario/delete/' . $BeanUsuario->getIdUsuario(), '<i class=\'glyphicon glyphicon-trash\'></i>', 'class' => 'btn btn-default']) ?></td>
             </tr>
         <?php } ?>
         <?php } ?>

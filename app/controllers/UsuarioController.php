@@ -43,6 +43,19 @@ class UsuarioController extends ControllerBase {
             ]);
 
             return;
+        }else{
+            $listBeanUsuario = array();
+            
+            foreach ($usuario as $tupla) {
+                $beanUsuario = new BeanUsuario();
+                $beanUsuario->setIdUsuario($tupla->getIdUsuario());
+                $beanUsuario->setUserName($tupla->getUserName());
+                $beanUsuario->setPassword("***********************************");
+                $beanUsuario->setEstadoRegistro($tupla->getEstadoRegistro());
+                
+                array_push($listBeanUsuario,
+                           $beanUsuario);
+            }
         }
 
         $paginator = new Paginator([
@@ -52,6 +65,7 @@ class UsuarioController extends ControllerBase {
         ]);
 
         $this->view->page = $paginator->getPaginate();
+        $this->view->listBeanUsuario = $listBeanUsuario;
     }
 
     /**
@@ -109,9 +123,13 @@ class UsuarioController extends ControllerBase {
 
         $usuario = new Usuario();
         $usuario->Username = $this->request->getPost("userName");
-        $usuario->Password = $this->request->getPost("password");
+        
         $usuario->Estadoregistro = $this->request->getPost("estadoRegistro");
 
+        $clave = base64_encode('Vamos_por_mas_tfc');
+        $pasword = password_hash($this->request->getPost("password"),PASSWORD_BCRYPT, array("cost" => 12, "salt" => $clave));
+
+        $usuario->Password = $pasword;
 
         if (!$usuario->save()) {
             foreach ($usuario->getMessages() as $message) {

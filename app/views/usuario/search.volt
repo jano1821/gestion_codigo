@@ -26,15 +26,15 @@
             </tr>
         <tbody>
         {% if page.items is defined %}
-        {% for usuario in page.items %}
+        {% for BeanUsuario in listBeanUsuario %}
             <tr>
-                <td>{{ usuario.idUsuario }}</td>
-            <td>{{ usuario.userName }}</td>
-            <td>{{ usuario.password }}</td>
-            <td>{{ usuario.estadoRegistro }}</td>
+                <td>{{ BeanUsuario.getIdUsuario() }}</td>
+            <td>{{ BeanUsuario.getUserName() }}</td>
+            <td>{{ BeanUsuario.getPassword() }}</td>
+            <td>{{ BeanUsuario.getEstadoRegistro() }}</td>
 
-<td>{{ link_to("usuario/edit/"~usuario.idUsuario, "<i class='glyphicon glyphicon-edit'></i>","class":"btn btn-default") }}</td>
-<td>{{ link_to("usuario/delete/"~usuario.idUsuario, "<i class='glyphicon glyphicon-trash'></i>","class":"btn btn-default") }}</td>
+<td>{{ link_to("usuario/edit/"~BeanUsuario.getIdUsuario(), "<i class='glyphicon glyphicon-edit'></i>","class":"btn btn-default") }}</td>
+<td>{{ link_to("usuario/delete/"~BeanUsuario.getIdUsuario(), "<i class='glyphicon glyphicon-trash'></i>","class":"btn btn-default") }}</td>
             </tr>
         {% endfor %}
         {% endif %}

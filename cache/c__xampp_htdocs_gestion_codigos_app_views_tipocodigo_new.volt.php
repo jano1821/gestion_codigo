@@ -44,7 +44,7 @@
 <label for="fieldEstadoregistro" class="control-label">Estado de Registro</label>
 </div>
 <div class="col-md-2">
-<?= $this->tag->selectStatic(['estadoRegistro', ['' => 'Seleccione Tipo...', 'S' => 'Activo', 'N' => 'Inactivo'], 'class' => 'form-control']) ?>
+<?= $this->tag->selectStatic(['estadoRegistro', ['' => 'Seleccione Estado...', 'S' => 'Activo', 'N' => 'Inactivo'], 'class' => 'form-control']) ?>
 </div>
 </div>
 

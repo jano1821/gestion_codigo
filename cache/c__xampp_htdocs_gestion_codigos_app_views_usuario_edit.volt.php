@@ -5,7 +5,7 @@
 <div class="btn-group pull-right">
         <?= $this->tag->linkTo(['usuario/index', '<i class=\'glyphicon glyphicon-chevron-left\'></i> Volver', 'class' => 'btn btn-info']) ?>
 </div>
-<h4><i class='glyphicon glyphicon-edit'></i> Editar Tipo</h4>
+<h4><i class='glyphicon glyphicon-edit'></i> Editar Usuario</h4>
 </div>
 <div class="page-header">
 </div>
@@ -21,7 +21,7 @@
 <div class="col-md-2">
     <label for="fieldUsername" class="control-label">Nombre de Usuario</label>
 </div>
-<div class="col-md-3">
+<div class="col-md-2">
         <?= $this->tag->textField(['userName', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldUsername']) ?>
     </div>
 </div>
@@ -33,7 +33,7 @@
     <label for="fieldPassword" class="control-label">Password</label>
 </div>
 <div class="col-md-3">
-        <?= $this->tag->textField(['password', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldPassword']) ?>
+        <?= $this->tag->passwordField(['password', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldPassword']) ?>
     </div>
 </div>
 
@@ -44,7 +44,7 @@
     <label for="fieldEstadoregistro" class="control-label">Estado de Registro</label>
 </div>
 <div class="col-md-3">
-        <?= $this->tag->textField(['estadoRegistro', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldEstadoregistro']) ?>
+        <?= $this->tag->selectStatic(['estadoRegistro', ['' => 'Seleccione Usuario...', 'S' => 'Activo', 'N' => 'Inactivo'], 'class' => 'form-control']) ?>
     </div>
 </div>
 

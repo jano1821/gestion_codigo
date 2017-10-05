@@ -2,7 +2,7 @@
     <div class="container">
         <div class="panel panel-info">
             <div class="panel-heading">
-	    <div class="btn-group pull-right">>
+	    <div class="btn-group pull-right">
    <?= $this->tag->linkTo(['menu/index', '<i class=\'glyphicon glyphicon-chevron-left\'></i> Volver', 'class' => 'btn btn-info']) ?>
                 <?= $this->tag->linkTo(['usuario/new', '<i class=\'glyphicon glyphicon-plus\'></i> Nuevo usuario', 'class' => 'btn btn-info']) ?>
             </div>
@@ -44,7 +44,7 @@
                     <div class="col-md-2">
     <label for="fieldPassword" class="control-label">Password</label>
 </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
         <?= $this->tag->textField(['password', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldPassword']) ?>
     </div>
 </div>
@@ -55,7 +55,7 @@
                     <div class="col-md-2">
     <label for="fieldEstadoregistro" class="control-label">Estado de Registro</label>
 </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
         <?= $this->tag->selectStatic(['estadoRegistro', ['' => 'Seleccione Usuario...', 'S' => 'Activo', 'N' => 'Inactivo'], 'class' => 'form-control']) ?>
     </div>
 </div>
