@@ -18,7 +18,7 @@
 <div class="col-md-3">
 </div>
 <div class="col-md-2">
-<label for="fieldValorcodigo" class="col-sm-2 control-label">ValorCodigo</label>
+<label for="fieldValorcodigo" class="control-label">Valor de Código</label>
 </div>
 <div class="col-md-2">
 {{ text_field("valorCodigo", "size" : 30, "class" : "form-control", "id" : "fieldValorcodigo") }}
@@ -29,7 +29,7 @@
 <div class="col-md-3">
 </div>
 <div class="col-md-2">
-<label for="fieldDescripcioncodigo" class="col-sm-2 control-label">DescripcionCodigo</label>
+<label for="fieldDescripcioncodigo" class="control-label">Descripción de Código</label>
 </div>
 <div class="col-md-4">
 {{ text_field("descripcionCodigo", "size" : 30, "class" : "form-control", "id" : "fieldDescripcioncodigo") }}
@@ -40,7 +40,7 @@
 <div class="col-md-3">
 </div>
 <div class="col-md-2">
-<label for="fieldFecharegistro" class="col-sm-2 control-label">FechaRegistro</label>
+<label for="fieldFecharegistro" class="control-label">Fecha de Registro</label>
 </div>
 <div class="col-md-2">
 {{ date_field("fechaRegistro", "size" : 30, "class" : "form-control", "id" : "fieldFecharegistro") }}
@@ -51,7 +51,7 @@
 <div class="col-md-3">
 </div>
 <div class="col-md-2">
-<label for="fieldRequerimiento" class="col-sm-2 control-label">Requerimiento</label>
+<label for="fieldRequerimiento" class="control-label">Requerimiento</label>
 </div>
 <div class="col-md-2">
 {{ text_field("Requerimiento", "size" : 30, "class" : "form-control", "id" : "fieldRequerimiento") }}
@@ -62,7 +62,7 @@
 <div class="col-md-3">
 </div>
 <div class="col-md-2">
-<label for="fieldIdlidertecnico" class="col-sm-2 control-label">IdLiderTecnico</label>
+<label for="fieldIdlidertecnico" class="control-label">Lider Técnico</label>
 </div>
 <div class="col-md-3">
 {% if liderTecnico is defined %}
@@ -75,7 +75,7 @@
 <div class="col-md-3">
 </div>
 <div class="col-md-2">
-<label for="fieldIdliderfuncional" class="col-sm-2 control-label">IdLiderFuncional</label>
+<label for="fieldIdliderfuncional" class="control-label">Lider Funcional</label>
 </div>
 <div class="col-md-3">
 {% if liderFuncional is defined %}
@@ -88,7 +88,7 @@
 <div class="col-md-3">
 </div>
 <div class="col-md-2">
-<label for="fieldIdtipocodigo" class="col-sm-2 control-label">IdTipoCodigo</label>
+<label for="fieldIdtipocodigo" class="control-label">Tipo de Código</label>
 </div>
 <div class="col-md-3">
 {% if tipoCodigo is defined %}
@@ -97,6 +97,18 @@
 </div>
 </div>
 
+<div class="form-group">
+<div class="col-md-3">
+</div>
+<div class="col-md-2">
+<label for="fieldIdmodulo" class="control-label">Módulo</label>
+</div>
+<div class="col-md-3">
+{% if modulo is defined %}
+{{ select("idModulo", modulo,'useEmpty': true, 'emptyText': 'Seleccione un Módulo...', 'emptyValue': '', 'using': ['idModulo', 'descripcionModulo'], "class" : "form-control") }}
+{% endif %}
+</div>
+</div>
 
 {{ hidden_field("idCodigo") }}
 

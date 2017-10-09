@@ -292,7 +292,7 @@ class CatalogoCodigo extends \Phalcon\Mvc\Model {
                         'valorCodigo' => 'valorCodigo',
                         'descripcionCodigo' => 'descripcionCodigo',
                         'fechaRegistro' => 'fechaRegistro',
-                        'Requerimiento' => 'Requerimiento',
+                        'requerimiento' => 'requerimiento',
                         'idLiderTecnico' => 'idLiderTecnico',
                         'idLiderFuncional' => 'idLiderFuncional',
                         'idTipoCodigo' => 'idTipoCodigo',

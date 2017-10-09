@@ -16,7 +16,6 @@
     <div class="table-responsive">
         <table class="table">
             <tr>
-                <th>Id Persona</th>
                 <th>Nombre Persona</th>
                 <th>Cargo</th>
 
@@ -25,14 +24,13 @@
             </tr>
         <tbody>
         <?php if (isset($page->items)) { ?>
-        <?php foreach ($listBeanPersona as $beanPersona) { ?>
+        <?php foreach ($page->items as $persona) { ?>
             <tr>
-                <td><?= $beanPersona->getIdpersona() ?></td>
-                <td><?= $beanPersona->getNombrePersona() ?></td>
-                <td><?= $beanPersona->getDescripcionCargo() ?></td>
+                <td><?= $persona->nombrePersona ?></td>
+                <td><?= $persona->descripcionCargo ?></td>
 
-                <td><?= $this->tag->linkTo(['persona/edit/' . $beanPersona->getIdpersona(), '<i class=\'glyphicon glyphicon-edit\'></i>', 'class' => 'btn btn-default']) ?></td>
-                <td><?= $this->tag->linkTo(['persona/delete/' . $beanPersona->getIdpersona(), '<i class=\'glyphicon glyphicon-trash\'></i>', 'class' => 'btn btn-default']) ?></td>
+                <td><?= $this->tag->linkTo(['persona/edit/' . $persona->idpersona, '<i class=\'glyphicon glyphicon-edit\'></i>', 'class' => 'btn btn-default']) ?></td>
+                <td><?= $this->tag->linkTo(['persona/delete/' . $persona->idpersona, '<i class=\'glyphicon glyphicon-trash\'></i>', 'class' => 'btn btn-default']) ?></td>
                             
             </tr>
         <?php } ?>

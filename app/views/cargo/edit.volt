@@ -3,7 +3,7 @@
 <div class="panel panel-info">
 <div class="panel-heading">
 <div class="btn-group pull-right">
-        {{ link_to("cargo/index", "<i class='glyphicon glyphicon-chevron-left'></i> Volver","class":"btn btn-info") }}
+{{ link_to("cargo/index", "<i class='glyphicon glyphicon-chevron-left'></i> Volver","class":"btn btn-info") }}
 </div>
 <h4><i class='glyphicon glyphicon-edit'></i> Editar Cargo</h4>
 </div>
@@ -19,11 +19,11 @@
 <div class="col-md-3">
 </div>
 <div class="col-md-2">
-    <label for="fieldDescripcioncargo" class="control-label">Descripcion de Cargo</label>
+<label for="fieldDescripcioncargo" class="control-label">Descripcion de Cargo</label>
 </div>
 <div class="col-md-2">
-        {{ text_field("descripcionCargo", "size" : 30, "class" : "form-control", "id" : "fieldDescripcioncargo") }}
-    </div>
+{{ text_field("descripcionCargo", "size" : 30, "class" : "form-control", "id" : "fieldDescripcioncargo") }}
+</div>
 </div>
 
 

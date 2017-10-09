@@ -20,17 +20,6 @@
             <div class="col-md-3">
             </div>
             <div class="col-md-2">
-                <label for="fieldIdpersona" class="control-label">Id Persona</label>
-            </div>
-            <div class="col-md-2">
-                {{ text_field("idpersona", "type" : "numeric", "class" : "form-control", "id" : "fieldIdpersona") }}
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-2">
                 <label for="fieldNombrepersona" class="control-label">Nombre Persona</label>
             </div>
             <div class="col-md-4">

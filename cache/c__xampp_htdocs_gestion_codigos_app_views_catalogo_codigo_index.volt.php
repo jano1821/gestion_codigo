@@ -4,7 +4,7 @@
             <div class="panel-heading">
 	    <div class="btn-group pull-right">
                 <?= $this->tag->linkTo(['menu/index', '<i class=\'glyphicon glyphicon-chevron-left\'></i> Volver', 'class' => 'btn btn-info']) ?>
-                <?= $this->tag->linkTo(['catalogo_codigo/new', '<i class=\'glyphicon glyphicon-plus\'></i> Nuevo', 'class' => 'btn btn-info']) ?>
+                <?= $this->tag->linkTo(['catalogo_codigo/new', '<i class=\'glyphicon glyphicon-plus\'></i> Nuevo Codigo', 'class' => 'btn btn-info']) ?>
             </div>
             <h4><i class='glyphicon glyphicon-search'></i> Búsqueda de Códigos</h4>
 	</div>
@@ -34,16 +34,7 @@
                         <?= $this->tag->textField(['descripcionCodigo', 'size' => 200, 'class' => 'form-control', 'id' => 'fieldDescripcioncodigo']) ?>
                 </div>
                     </div>
-                <div class="form-group">
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-2">
-                        <label for="fieldFecharegistro" class="control-label">Fecha de Registro</label>
-                    </div>
-                    <div class="col-md-2">
-                        <?= $this->tag->dateField(['fechaRegistro', 'size' => 10, 'type' => 'date', 'class' => 'form-control', 'id' => 'fieldFecharegistro']) ?>
-                    </div>
-                </div>
+
                 <div class="form-group">
                     <div class="col-md-3">
                     </div>
@@ -87,6 +78,18 @@
                     <div class="col-md-3">
                         <?php if (isset($tipoCodigo)) { ?>
                             <?= $this->tag->select(['idTipoCodigo', $tipoCodigo, 'useEmpty' => true, 'emptyText' => 'Seleccione un Tipo de Código...', 'emptyValue' => '', 'using' => ['idTipoCodigo', 'descripcionTipo'], 'class' => 'form-control']) ?>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="fieldIdmodulo" class="control-label">Módulo</label>
+                    </div>
+                    <div class="col-md-3">
+                        <?php if (isset($modulo)) { ?>
+                            <?= $this->tag->select(['idModulo', $modulo, 'useEmpty' => true, 'emptyText' => 'Seleccione Módulo...', 'emptyValue' => '', 'using' => ['idModulo', 'descripcionModulo'], 'class' => 'form-control']) ?>
                         <?php } ?>
                     </div>
                 </div>

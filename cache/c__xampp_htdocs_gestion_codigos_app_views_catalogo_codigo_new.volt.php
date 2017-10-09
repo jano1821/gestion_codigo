@@ -12,7 +12,7 @@
 
         <?= $this->getContent() ?>
 
-        <?= $this->tag->form(['catalogo_codigo/create', 'method' => 'post', 'autocomplete' => 'off', 'class' => 'form-horizontal']) ?>
+        <?= $this->tag->form(['catalogo_codigo/create', 'method' => 'post', 'autocomplete' => 'off', 'class' => 'form-horizontal', 'id' => 'form']) ?>
             <div class="table">
                 <div class="form-group">
                     <div class="col-md-3">
@@ -97,6 +97,18 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="fieldIdmodulo" class="control-label">Módulo</label>
+                    </div>
+                    <div class="col-md-3">
+                        <?php if (isset($modulo)) { ?>
+                            <?= $this->tag->select(['idModulo', $modulo, 'useEmpty' => true, 'emptyText' => 'Seleccione Módulo...', 'emptyValue' => '', 'using' => ['idModulo', 'descripcionModulo'], 'class' => 'form-control']) ?>
+                        <?php } ?>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <div class="col-md-3">
@@ -105,9 +117,33 @@
                     </div>
                     <div class="col-md-2">
                         <?= $this->tag->submitButton(['Guardar', 'class' => 'col-sm-10 btn btn-primary']) ?>
+                        <?= $this->tag->submitButton(['AJAX', 'class' => 'col-sm-10 btn btn-primary']) ?>
                     </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        /*$.ajax({
+            url: "<?= $this->url->get('catalogo_codigo/ajax') ?>"
+        }).done(function(data) {
+            console.log(data)
+        });*/
+
+        $("#form").on("submit", function(e) {
+            e.preventDefault();
+            $.post("<?= $this->url->get('catalogo_codigo/ajaxPost') ?>", $(this).serialize() , function(data) {
+                console.log(data);
+alert(data[0]);
+            }).done(function() { 
+                alert("correcto");
+            }).fail(function() {
+                alert("error"); 
+            })
+        })
+    })
+
+</script>

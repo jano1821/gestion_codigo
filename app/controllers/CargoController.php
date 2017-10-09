@@ -1,6 +1,5 @@
 <?php
  
-use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 
 
@@ -22,7 +21,7 @@ class CargoController extends ControllerBase
     {
         $numberPage = 1;
         if ($this->request->isPost()) {
-            $query = Criteria::fromInput($this->di, 'Cargo', $_POST);
+            $query = Parent::fromInput($this->di, 'Cargo', $_POST);
             $this->persistent->parameters = $query->getParams();
         } else {
             $numberPage = $this->request->getQuery("page", "int");

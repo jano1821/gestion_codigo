@@ -176,7 +176,13 @@
                             <li><a href="">Por Tipo de Codigo</a></li>
                         </ul>
                     </li>
-
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Datos <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="">Importar</a></li>
+                            <li><a href="">Exportar</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">

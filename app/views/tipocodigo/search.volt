@@ -17,10 +17,8 @@
 <table class="table">
 <tr  class="info">
 <tr>
-<th>Id Tipo</th>
 <th>Descripcion de Tipo</th>
 <th>Longitud de Tipo</th>
-<th>Estado de Registro</th>
 
 <th></th>
 <th></th>
@@ -29,10 +27,8 @@
 {% if page.items is defined %}
 {% for tipocodigo in page.items %}
 <tr>
-<td>{{ tipocodigo.idTipoCodigo }}</td>
 <td>{{ tipocodigo.descripcionTipo }}</td>
 <td>{{ tipocodigo.longitudCodigo }}</td>
-<td>{{ tipocodigo.estadoRegistro }}</td>
 
 <td>{{ link_to("tipocodigo/edit/"~tipocodigo.idTipoCodigo, "<i class='glyphicon glyphicon-edit'></i>","class":"btn btn-default") }}</td>
 <td>{{ link_to("tipocodigo/delete/"~tipocodigo.idTipoCodigo, "<i class='glyphicon glyphicon-trash'></i>","class":"btn btn-default") }}</td>

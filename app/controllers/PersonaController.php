@@ -1,6 +1,5 @@
 <?php
 
-use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 class PersonaController extends ControllerBase {
 
@@ -17,25 +16,34 @@ class PersonaController extends ControllerBase {
      */
     public function searchAction() {
         $numberPage = 1;
-        if ($this->request->isPost()) {
-            $query = Criteria::fromInput($this->di,
-                                         'Persona',
-                                         $_POST);
-            $this->persistent->parameters = $query->getParams();
-        }else {
+        echo $this->request->getPost("page");
+        if (!$this->request->isPost()) {
             $numberPage = $this->request->getQuery("page",
                                                    "int");
         }
 
-        $parameters = $this->persistent->parameters;
-        if (!is_array($parameters)) {
-            $parameters = [];
-        }
-        $parameters["order"] = "idpersona";
+        $nombrepersona = $this->request->getPost("nombrePersona");
+        $idcargo = $this->request->getPost("idCargo");
+        
+        $persona = $this->modelsManager->createBuilder()
+                                ->columns("pe.nombrePersona nombrePersona,".
+                                          "ca.descripcionCargo descripcionCargo,".
+                                          "pe.idpersona idpersona")
+                                ->addFrom('Persona','pe')
+                                ->innerJoin('Cargo','pe.idCargo = ca.idCargo','ca')
+                                ->andWhere('pe.nombrePersona like :nombrePersona: AND '.
+                                           'ca.descripcionCargo like :descripcionCargo: ',
+                                    [
+                                        'nombrePersona'         => "%".$nombrepersona."%",
+                                        'descripcionCargo'   => "%".$idcargo."%",
+                                    ]
+                                )
+                                ->orderBy('pe.nombrePersona')
+                                ->getQuery()
+                                ->execute();
 
-        $persona = Persona::find($parameters);
         if (count($persona) == 0) {
-            $this->flash->notice("No se encontraron Resultados para esta Búsqueda");
+            $this->flash->notice("No se Encontraron Resultados para esta Búsqueda");
 
             $this->dispatcher->forward([
                             "controller" => "persona",
@@ -43,22 +51,6 @@ class PersonaController extends ControllerBase {
             ]);
 
             return;
-        }else{
-            $listBeanPersona = array();
-            foreach ($persona as $valores) {
-                $beanPersona = new BeanPersona();
-                
-                $beanPersona->setIdCargo($valores->getIdCargo());
-                $beanPersona->setIdpersona($valores->getIdpersona());
-                $beanPersona->setNombrePersona($valores->getNombrePersona());
-                $cargo = Cargo::find($valores->getIdCargo());
-                foreach ($cargo as $tupla) {
-                    $descripcion = $tupla->getDescripcionCargo();
-                }
-                $beanPersona->setDescripcionCargo($descripcion);
-                
-                array_push($listBeanPersona,$beanPersona);
-            }
         }
 
         $paginator = new Paginator([
@@ -68,7 +60,6 @@ class PersonaController extends ControllerBase {
         ]);
 
         $this->view->page = $paginator->getPaginate();
-        $this->view->listBeanPersona = $listBeanPersona;
     }
 
     /**
@@ -76,7 +67,7 @@ class PersonaController extends ControllerBase {
      */
     public function newAction() {
         $cargo = Cargo::find();
-        
+
         $this->view->cargo = $cargo;
     }
 
@@ -99,7 +90,7 @@ class PersonaController extends ControllerBase {
 
                 return;
             }
-            
+
             $cargo = Cargo::find();
 
             $this->view->cargo = $cargo;

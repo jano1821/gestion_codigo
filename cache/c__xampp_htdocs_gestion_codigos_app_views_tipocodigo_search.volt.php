@@ -17,10 +17,8 @@
 <table class="table">
 <tr  class="info">
 <tr>
-<th>Id Tipo</th>
 <th>Descripcion de Tipo</th>
 <th>Longitud de Tipo</th>
-<th>Estado de Registro</th>
 
 <th></th>
 <th></th>
@@ -29,10 +27,8 @@
 <?php if (isset($page->items)) { ?>
 <?php foreach ($page->items as $tipocodigo) { ?>
 <tr>
-<td><?= $tipocodigo->idTipoCodigo ?></td>
 <td><?= $tipocodigo->descripcionTipo ?></td>
 <td><?= $tipocodigo->longitudCodigo ?></td>
-<td><?= $tipocodigo->estadoRegistro ?></td>
 
 <td><?= $this->tag->linkTo(['tipocodigo/edit/' . $tipocodigo->idTipoCodigo, '<i class=\'glyphicon glyphicon-edit\'></i>', 'class' => 'btn btn-default']) ?></td>
 <td><?= $this->tag->linkTo(['tipocodigo/delete/' . $tipocodigo->idTipoCodigo, '<i class=\'glyphicon glyphicon-trash\'></i>', 'class' => 'btn btn-default']) ?></td>

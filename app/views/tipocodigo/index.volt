@@ -16,16 +16,6 @@
 {{ form("tipocodigo/search", "method":"post", "autocomplete" : "off", "class" : "form-horizontal") }}
 
 <div class="table">
-                <div class="form-group">
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-2">
-    <label for="fieldIdtipocodigo" class="control-label">Id Tipo</label>
-</div>
-                    <div class="col-md-2">
-        {{ text_field("idTipoCodigo", "type" : "numeric", "class" : "form-control", "id" : "fieldIdtipocodigo") }}
-    </div>
-</div>
 
                 <div class="form-group">
                     <div class="col-md-3">

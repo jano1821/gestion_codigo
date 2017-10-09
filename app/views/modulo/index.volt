@@ -15,16 +15,6 @@
 {{ form("modulo/search", "method":"post", "autocomplete" : "off", "class" : "form-horizontal") }}
 
 <div class="table">
-<div class="form-group">
-<div class="col-md-3">
-</div>
-<div class="col-md-2">
-<label for="fieldIdmodulo" class="control-label">Id Módulo</label>
-</div>
-<div class="col-md-2">
-{{ text_field("idModulo", "type" : "numeric", "class" : "form-control", "id" : "fieldIdmodulo") }}
-</div>
-</div>
 
 <div class="form-group">
 <div class="col-md-3">
@@ -63,21 +53,10 @@
 <div class="col-md-3">
 </div>
 <div class="col-md-2">
-<label for="fieldFecharegistro" class="control-label">Fecha de Registro</label>
-</div>
-<div class="col-md-2">
-{{ text_field("fechaRegistro", "size" : 30, "class" : "form-control", "id" : "fieldFecharegistro") }}
-</div>
-</div>
-
-<div class="form-group">
-<div class="col-md-3">
-</div>
-<div class="col-md-2">
 <label for="fieldEstadoregistro" class="control-label">Estado de Registro</label>
 </div>
 <div class="col-md-2">
-{{ select_static('estadoRegistro', ['':'Seleccione Modulo...', 'S' : 'Activo', 'N' : 'Inactivo'], "class": "form-control") }}
+{{ select_static('estadoRegistro', ['':'Seleccione Estado...', 'S' : 'Activo', 'N' : 'Inactivo'], "class": "form-control") }}
 </div>
 </div>
 

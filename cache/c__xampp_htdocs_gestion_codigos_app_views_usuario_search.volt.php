@@ -16,10 +16,8 @@
 <div class="table-responsive">
 <table class="table">
             <tr>
-                <th>Id Usuario</th>
             <th>Nombre de Usuario</th>
             <th>Password</th>
-            <th>Estado de Registro</th>
 
                 <th></th>
                 <th></th>
@@ -28,10 +26,8 @@
         <?php if (isset($page->items)) { ?>
         <?php foreach ($listBeanUsuario as $BeanUsuario) { ?>
             <tr>
-                <td><?= $BeanUsuario->getIdUsuario() ?></td>
             <td><?= $BeanUsuario->getUserName() ?></td>
             <td><?= $BeanUsuario->getPassword() ?></td>
-            <td><?= $BeanUsuario->getEstadoRegistro() ?></td>
 
 <td><?= $this->tag->linkTo(['usuario/edit/' . $BeanUsuario->getIdUsuario(), '<i class=\'glyphicon glyphicon-edit\'></i>', 'class' => 'btn btn-default']) ?></td>
 <td><?= $this->tag->linkTo(['usuario/delete/' . $BeanUsuario->getIdUsuario(), '<i class=\'glyphicon glyphicon-trash\'></i>', 'class' => 'btn btn-default']) ?></td>

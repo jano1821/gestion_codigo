@@ -23,10 +23,13 @@ class CatalogoCodigoController extends ControllerBase {
         $liderTecnico = Persona::find($this->persistent->liderTecnico);
 
         $liderFuncional = Persona::find($this->persistent->liderFuncional);
+        
+        $modulo = Modulo::find($this->persistent->modulo);
 
         $this->view->tipoCodigo = $tipocodigo;
         $this->view->liderTecnico = $liderTecnico;
         $this->view->liderFuncional = $liderFuncional;
+        $this->view->modulo = $modulo;
     }
 
     /**
@@ -34,26 +37,55 @@ class CatalogoCodigoController extends ControllerBase {
      */
     public function searchAction() {
         $numberPage = 1;
-        $descripcion = '';
-        $nombreLiderTecnico = '';
-        $nombreLiderFuncional = '';
-        if ($this->request->isPost()) {
-            $query = parent::fromInput($this->di,
-                                       'CatalogoCodigo',
-                                       $_POST);
-            $this->persistent->parameters = $query->getParams();
-        }else {
+        if (!$this->request->isPost()) {
             $numberPage = $this->request->getQuery("page",
                                                    "int");
         }
 
-        $parameters = $this->persistent->parameters;
-        if (!is_array($parameters)) {
-            $parameters = [];
-        }
-        $parameters["order"] = "idCodigo desc";
-
-        $catalogo_codigo = CatalogoCodigo::find($parameters);
+        $valorcodigo = $this->request->getPost("valorCodigo");
+        $descripcioncodigo = $this->request->getPost("descripcionCodigo");
+        $requerimiento = $this->request->getPost("Requerimiento");
+        $lidertecnico = $this->request->getPost("idLiderTecnico");
+        $liderfuncional = $this->request->getPost("idLiderFuncional");
+        $tipocodigo = $this->request->getPost("idTipoCodigo");
+        $modulo = $this->request->getPost("idModulo");
+        
+        $catalogo_codigo = $this->modelsManager->createBuilder()
+                                ->columns("cc.idCodigo,".
+                                          "cc.valorCodigo,".
+                                          "cc.descripcionCodigo,".
+                                          "DATE_FORMAT(cc.fechaRegistro, '%d/%m/%Y') fechaRegistro,".
+                                          "cc.requerimiento requerimiento,".
+                                          "lt.nombrePersona liderTecnico,".
+                                          "lf.nombrePersona liderFuncional,".
+                                          "tc.descripcionTipo,".
+                                          "mo.descripcionModulo")
+                                ->addFrom('CatalogoCodigo','cc')
+                                ->innerJoin('Tipocodigo','tc.idTipoCodigo = cc.idTipoCodigo','tc')
+                                ->innerJoin('Persona','lt.idpersona = cc.idLiderTecnico','lt')
+                                ->innerJoin('Persona', 'lf.idpersona = cc.idLiderFuncional','lf')
+                                ->innerJoin('Modulo', 'mo.idModulo = cc.idModulo','mo')
+                                ->andWhere('cc.valorCodigo like :valor: AND '.
+                                           'cc.descripcionCodigo like :descripcion: AND '.
+                                           'cc.requerimiento like :requerimiento: AND '.
+                                           'cc.idLiderTecnico like :tecnico: AND '.
+                                           'cc.idLiderFuncional like :funcional: AND '.
+                                           'cc.idTipoCodigo like :tipo: AND '.
+                                           'cc.idModulo like :modulo: ',
+                                    [
+                                        'valor'         => "%".$valorcodigo."%",
+                                        'descripcion'   => "%".$descripcioncodigo."%",
+                                        'requerimiento' => "%".$requerimiento."%",
+                                        'tecnico'       => "%".$lidertecnico."%",
+                                        'funcional'     => "%".$liderfuncional."%",
+                                        'tipo'          => "%".$tipocodigo."%",
+                                        'modulo'        => "%".$modulo."%",
+                                    ]
+                                )
+                                ->orderBy('cc.valorCodigo')
+                                ->getQuery()
+                                ->execute();
+        
         if (count($catalogo_codigo) == 0) {
             $this->flash->notice("La Búqueda no ha Obtenido Resultados");
 
@@ -63,47 +95,8 @@ class CatalogoCodigoController extends ControllerBase {
             ]);
 
             return;
-        }else {
-            $listBeanCatalogoCodigo = array();
-            foreach ($catalogo_codigo as $codigo) {
-                $beanCatalogoCodigo = new BeanCatalogoCodigo();
-
-                $date = new DateTime($codigo->getFechaRegistro());
-
-                $beanCatalogoCodigo->setIdCodigo($codigo->getIdCodigo());
-                $beanCatalogoCodigo->setValorCodigo($codigo->getValorCodigo());
-                $beanCatalogoCodigo->setDescripcionCodigo($codigo->getDescripcionCodigo());
-                $beanCatalogoCodigo->setFechaRegistro($date->format('d/m/Y'));
-                $beanCatalogoCodigo->setRequerimiento($codigo->getRequerimiento());
-                $beanCatalogoCodigo->setIdLiderTecnico($codigo->getIdLiderTecnico());
-                $beanCatalogoCodigo->setIdLiderFuncional($codigo->getIdLiderFuncional());
-                $beanCatalogoCodigo->setIdTipoCodigo($codigo->getIdTipoCodigo());
-
-                $tipocodigo = Tipocodigo::find($codigo->getIdTipoCodigo());
-                foreach ($tipocodigo as $tupla) {
-                    $descripcion = $tupla->getDescripcionTipo();
-                }
-                $beanCatalogoCodigo->setDescripcionTipoProducto($descripcion);
-
-                $liderTecnico = Persona::find($codigo->getIdLiderTecnico());
-                foreach ($liderTecnico as $tupla) {
-                    $nombreLiderTecnico = $tupla->getNombrePersona();
-                }
-
-                $beanCatalogoCodigo->setNombreLiderTecnico($nombreLiderTecnico);
-
-                $liderFuncional = Persona::find($codigo->getIdLiderFuncional());
-                foreach ($liderFuncional as $tupla) {
-                    $nombreLiderFuncional = $tupla->getNombrePersona();
-                }
-
-                $beanCatalogoCodigo->setNombreLiderfuncional($nombreLiderFuncional);
-
-                array_push($listBeanCatalogoCodigo,
-                           $beanCatalogoCodigo);
-            }
         }
-
+        
         $paginator = new Paginator([
                         'data' => $catalogo_codigo,
                         'limit' => 10,
@@ -111,7 +104,6 @@ class CatalogoCodigoController extends ControllerBase {
         ]);
 
         $this->view->page = $paginator->getPaginate();
-        $this->view->listBeanCatalogoCodigo = $listBeanCatalogoCodigo;
     }
 
     /**
@@ -133,10 +125,13 @@ class CatalogoCodigoController extends ControllerBase {
         $liderTecnico = Persona::find($this->persistent->liderTecnico);
 
         $liderFuncional = Persona::find($this->persistent->liderFuncional);
+        
+        $modulo = Modulo::find($this->persistent->modulo);
 
         $this->view->tipoCodigo = $tipocodigo;
         $this->view->liderTecnico = $liderTecnico;
         $this->view->liderFuncional = $liderFuncional;
+        $this->view->modulo = $modulo;
     }
 
     /**
@@ -174,10 +169,13 @@ class CatalogoCodigoController extends ControllerBase {
             $liderTecnico = Persona::find($this->persistent->liderTecnico);
 
             $liderFuncional = Persona::find($this->persistent->liderFuncional);
+            
+            $modulo = Modulo::find($this->persistent->modulo);
 
             $this->view->tipoCodigo = $tipocodigo;
             $this->view->liderTecnico = $liderTecnico;
             $this->view->liderFuncional = $liderFuncional;
+            $this->view->modulo = $modulo;
 
             $this->view->idCodigo = $catalogo_codigo->idCodigo;
 
@@ -191,13 +189,15 @@ class CatalogoCodigoController extends ControllerBase {
                                    date_format(new DateTime($catalogo_codigo->fechaRegistro),
                                                             'Y-m-d'));
             $this->tag->setDefault("Requerimiento",
-                                   $catalogo_codigo->Requerimiento);
+                                   $catalogo_codigo->requerimiento);
             $this->tag->setDefault("idLiderTecnico",
                                    $catalogo_codigo->idLiderTecnico);
             $this->tag->setDefault("idLiderFuncional",
                                    $catalogo_codigo->idLiderFuncional);
             $this->tag->setDefault("idTipoCodigo",
                                    $catalogo_codigo->idTipoCodigo);
+            $this->tag->setDefault("idModulo",
+                                   $catalogo_codigo->idModulo);
         }
     }
 
@@ -222,6 +222,7 @@ class CatalogoCodigoController extends ControllerBase {
         $catalogo_codigo->Idlidertecnico = $this->request->getPost("idLiderTecnico");
         $catalogo_codigo->Idliderfuncional = $this->request->getPost("idLiderFuncional");
         $catalogo_codigo->Idtipocodigo = $this->request->getPost("idTipoCodigo");
+        $catalogo_codigo->IdModulo = $this->request->getPost("idModulo");
 
 
         if (!$catalogo_codigo->save()) {
@@ -264,7 +265,7 @@ class CatalogoCodigoController extends ControllerBase {
         $catalogo_codigo = CatalogoCodigo::findFirstByidCodigo($idCodigo);
 
         if (!$catalogo_codigo) {
-            $this->flash->error("catalogo_codigo does not exist " . $idCodigo);
+            $this->flash->error("Codigo no Existe" . $idCodigo);
 
             $this->dispatcher->forward([
                             'controller' => "catalogo_codigo",
@@ -273,7 +274,6 @@ class CatalogoCodigoController extends ControllerBase {
 
             return;
         }
-
         $catalogo_codigo->Valorcodigo = $this->request->getPost("valorCodigo");
         $catalogo_codigo->Descripcioncodigo = $this->request->getPost("descripcionCodigo");
         $catalogo_codigo->Fecharegistro = $this->request->getPost("fechaRegistro");
@@ -281,6 +281,7 @@ class CatalogoCodigoController extends ControllerBase {
         $catalogo_codigo->Idlidertecnico = $this->request->getPost("idLiderTecnico");
         $catalogo_codigo->Idliderfuncional = $this->request->getPost("idLiderFuncional");
         $catalogo_codigo->Idtipocodigo = $this->request->getPost("idTipoCodigo");
+        $catalogo_codigo->Idmodulo = $this->request->getPost("idModulo");
 
 
         if (!$catalogo_codigo->save()) {
@@ -298,7 +299,7 @@ class CatalogoCodigoController extends ControllerBase {
             return;
         }
 
-        $this->flash->success("catalogo_codigo was updated successfully");
+        $this->flash->success("Código Actualizado Satisfactoriamente");
 
         $this->dispatcher->forward([
                         'controller' => "catalogo_codigo",
@@ -338,11 +339,47 @@ class CatalogoCodigoController extends ControllerBase {
             return;
         }
 
-        $this->flash->success("catalogo_codigo was deleted successfully");
+        $this->flash->success("Código Eliminado Satisfactoriamente");
 
         $this->dispatcher->forward([
                         'controller' => "catalogo_codigo",
                         'action' => "index"
         ]);
+    }
+    
+    public function ajaxAction() {
+        $this->view->disable();
+        if ($this->request->isGet() == true) {
+            if ($this->request->isAjax() == true) {
+                $this->response->setJsonContent(array('res' => array("1", "2", "3")));
+                $this->response->setStatusCode(200,
+                                               "OK");
+                $this->response->send();
+            }
+        }else {
+            $this->response->setStatusCode(404,
+                                           "Not Found");
+        }
+    }
+
+    public function ajaxPostAction() {
+        $this->view->disable();
+
+        if ($this->request->isPost() == true) {
+            if ($this->request->isAjax() == true) {
+                //los datos quedan limpios automáticamente
+                /*$email = $this->request->getPost("email",
+                                                 "email");
+                $password = $this->request->getPost('password',
+                                                    array('striptags', 'alphanum', 'trim'));*/
+                $this->response->setJsonContent(array('res' => array("email" => "jano18_21@hotmail.com", "password" => "123abc$$")));
+                $this->response->setStatusCode(200,
+                                               "OK");
+                $this->response->send();
+            }
+        }else {
+            $this->response->setStatusCode(404,
+                                           "Not Found");
+        }
     }
 }

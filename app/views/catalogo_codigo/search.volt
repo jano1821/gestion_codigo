@@ -4,7 +4,7 @@
 <div class="panel-heading">
 <div class="btn-group pull-right">
 {{ link_to("catalogo_codigo/index", "<i class='glyphicon glyphicon-chevron-left'></i> Volver","class":"btn btn-info") }}
-{{ link_to("catalogo_codigo/new", "<i class='glyphicon glyphicon-plus'></i> Nuevo","class":"btn btn-info") }}
+{{ link_to("catalogo_codigo/new", "<i class='glyphicon glyphicon-plus'></i> Nuevo Codigo","class":"btn btn-info") }}
 </div>
 <h4><i class='glyphicon glyphicon-search'></i> Resultado de Busqueda</h4>
 </div>
@@ -23,23 +23,25 @@
 <th>Lider Técnico</th>
 <th>Lider Funcional</th>
 <th>Tipo Codigo</th>
+<th>Módulo</th>
 <th class='text-center'></th>
 <th class='text-center'></th>
 </tr>
 <tbody>
 {% if page.items is defined %}
-{% for beanCatalogoCodigo in listBeanCatalogoCodigo %}
+{% for catalogoCodigo in page.items %}
 <tr>
-<td>{{ beanCatalogoCodigo.getValorCodigo() }}</td>
-<td>{{ beanCatalogoCodigo.getDescripcionCodigo() }}</td>
-<td align="center">{{ beanCatalogoCodigo.getFechaRegistro() }}</td>
-<td>{{ beanCatalogoCodigo.getRequerimiento() }}</td>
-<td>{{ beanCatalogoCodigo.getNombreLiderTecnico() }}</td>
-<td>{{ beanCatalogoCodigo.getNombreLiderfuncional() }}</td>
-<td>{{ beanCatalogoCodigo.getDescripcionTipoProducto() }}</td>
+<td>{{ catalogoCodigo.valorCodigo }}</td>
+<td>{{ catalogoCodigo.descripcionCodigo }}</td>
+<td align="center">{{ catalogoCodigo.fechaRegistro }}</td>
+<td>{{ catalogoCodigo.requerimiento }}</td>
+<td>{{ catalogoCodigo.liderTecnico }}</td>
+<td>{{ catalogoCodigo.liderFuncional }}</td>
+<td>{{ catalogoCodigo.descripcionTipo }}</td>
+<td>{{ catalogoCodigo.descripcionModulo }}</td>
 
-<td>{{ link_to("catalogo_codigo/edit/"~beanCatalogoCodigo.getIdCodigo(), "<i class='glyphicon glyphicon-edit'></i>","class":"btn btn-default") }}</td>
-<td>{{ link_to("catalogo_codigo/delete/"~beanCatalogoCodigo.getIdCodigo(), "<i class='glyphicon glyphicon-trash'></i>","class":"btn btn-default") }}</td>
+<td>{{ link_to("catalogo_codigo/edit/"~catalogoCodigo.idCodigo, "<i class='glyphicon glyphicon-edit'></i>","class":"btn btn-default") }}</td>
+<td>{{ link_to("catalogo_codigo/delete/"~catalogoCodigo.idCodigo, "<i class='glyphicon glyphicon-trash'></i>","class":"btn btn-default") }}</td>
 </tr>
 {% endfor %}
 {% endif %}

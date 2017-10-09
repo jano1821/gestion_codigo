@@ -16,7 +16,6 @@
     <div class="table-responsive">
         <table class="table">
             <tr>
-                <th>Id Persona</th>
                 <th>Nombre Persona</th>
                 <th>Cargo</th>
 
@@ -25,14 +24,13 @@
             </tr>
         <tbody>
         {% if page.items is defined %}
-        {% for beanPersona in listBeanPersona %}
+        {% for persona in page.items %}
             <tr>
-                <td>{{ beanPersona.getIdpersona() }}</td>
-                <td>{{ beanPersona.getNombrePersona() }}</td>
-                <td>{{ beanPersona.getDescripcionCargo() }}</td>
+                <td>{{ persona.nombrePersona }}</td>
+                <td>{{ persona.descripcionCargo }}</td>
 
-                <td>{{ link_to("persona/edit/"~beanPersona.getIdpersona(), "<i class='glyphicon glyphicon-edit'></i>","class":"btn btn-default") }}</td>
-                <td>{{ link_to("persona/delete/"~beanPersona.getIdpersona(), "<i class='glyphicon glyphicon-trash'></i>","class":"btn btn-default") }}</td>
+                <td>{{ link_to("persona/edit/"~persona.idpersona, "<i class='glyphicon glyphicon-edit'></i>","class":"btn btn-default") }}</td>
+                <td>{{ link_to("persona/delete/"~persona.idpersona, "<i class='glyphicon glyphicon-trash'></i>","class":"btn btn-default") }}</td>
                             
             </tr>
         {% endfor %}

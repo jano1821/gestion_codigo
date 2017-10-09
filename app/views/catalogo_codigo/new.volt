@@ -12,7 +12,7 @@
 
         {{ content() }}
 
-        {{ form("catalogo_codigo/create", "method":"post", "autocomplete" : "off", "class" : "form-horizontal") }}
+        {{ form("catalogo_codigo/create", "method":"post", "autocomplete" : "off", "class" : "form-horizontal", "id" : "form") }}
             <div class="table">
                 <div class="form-group">
                     <div class="col-md-3">
@@ -97,6 +97,18 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="fieldIdmodulo" class="control-label">Módulo</label>
+                    </div>
+                    <div class="col-md-3">
+                        {% if modulo is defined %}
+                            {{ select("idModulo", modulo,'useEmpty': true, 'emptyText': 'Seleccione Módulo...', 'emptyValue': '', 'using': ['idModulo', 'descripcionModulo'], "class" : "form-control") }}
+                        {% endif %}
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <div class="col-md-3">
@@ -105,9 +117,33 @@
                     </div>
                     <div class="col-md-2">
                         {{ submit_button('Guardar', 'class': 'col-sm-10 btn btn-primary') }}
+                        {{ submit_button('AJAX', 'class': 'col-sm-10 btn btn-primary') }}
                     </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        /*$.ajax({
+            url: "{{ url('catalogo_codigo/ajax') }}"
+        }).done(function(data) {
+            console.log(data)
+        });*/
+
+        $("#form").on("submit", function(e) {
+            e.preventDefault();
+            $.post("{{ url('catalogo_codigo/ajaxPost') }}", $(this).serialize() , function(data) {
+                console.log(data);
+alert(data[0]);
+            }).done(function() { 
+                alert("correcto");
+            }).fail(function() {
+                alert("error"); 
+            })
+        })
+    })
+
+</script>

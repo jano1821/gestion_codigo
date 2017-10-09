@@ -16,23 +16,39 @@ class ModuloController extends ControllerBase {
      */
     public function searchAction() {
         $numberPage = 1;
-        if ($this->request->isPost()) {
-            $query = parent::fromInput($this->di,
-                                       'Modulo',
-                                       $_POST);
-            $this->persistent->parameters = $query->getParams();
-        }else {
+        if (!$this->request->isPost()) {
             $numberPage = $this->request->getQuery("page",
                                                    "int");
         }
 
-        $parameters = $this->persistent->parameters;
-        if (!is_array($parameters)) {
-            $parameters = [];
-        }
-        $parameters["order"] = "idModulo";
-
-        $modulo = Modulo::find($parameters);
+        $prefijomodulo = $this->request->getPost("PrefijoModulo");
+        $correlativomodulo = $this->request->getPost("correlativoModulo");
+        $descripcionmodulo = $this->request->getPost("descripcionModulo");
+        $estadoregistro = $this->request->getPost("estadoRegistro");
+        
+        $modulo = $this->modelsManager->createBuilder()
+                                ->columns("mo.idModulo idModulo,".
+                                          "mo.prefijoModulo prefijoModulo,".
+                                          "mo.correlativoModulo correlativoModulo,".
+                                          "mo.descripcionModulo descripcionModulo,".
+                                          "DATE_FORMAT(mo.fechaRegistro, '%d/%m/%Y') fechaRegistro,".
+                                          "mo.estadoRegistro estadoRegistro")
+                                ->addFrom('Modulo','mo')
+                                ->andWhere('mo.prefijoModulo like :prefijoModulo: AND '.
+                                           'mo.correlativoModulo like :correlativoModulo: AND '.
+                                           'mo.descripcionModulo like :descripcionModulo: AND '.
+                                           'mo.estadoRegistro like :estadoRegistro: ',
+                                    [
+                                        'prefijoModulo'         => "%".$prefijomodulo."%",
+                                        'correlativoModulo'   => "%".$correlativomodulo."%",
+                                        'descripcionModulo'   => "%".$descripcionmodulo."%",
+                                        'estadoRegistro'   => "%".$estadoregistro."%",
+                                    ]
+                                )
+                                ->orderBy('mo.descripcionModulo')
+                                ->getQuery()
+                                ->execute();
+        
         if (count($modulo) == 0) {
             $this->flash->notice("La Búsqueda no Encontró Resultados");
 

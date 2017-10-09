@@ -4,7 +4,7 @@
             <div class="panel-heading">
 	    <div class="btn-group pull-right">
                 {{ link_to("menu/index", "<i class='glyphicon glyphicon-chevron-left'></i> Volver","class":"btn btn-info") }}
-                {{ link_to("catalogo_codigo/new", "<i class='glyphicon glyphicon-plus'></i> Nuevo","class":"btn btn-info") }}
+                {{ link_to("catalogo_codigo/new", "<i class='glyphicon glyphicon-plus'></i> Nuevo Codigo","class":"btn btn-info") }}
             </div>
             <h4><i class='glyphicon glyphicon-search'></i> Búsqueda de Códigos</h4>
 	</div>
@@ -34,16 +34,7 @@
                         {{ text_field("descripcionCodigo", "size" : 200, "class" : "form-control", "id" : "fieldDescripcioncodigo") }}
                 </div>
                     </div>
-                <div class="form-group">
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-2">
-                        <label for="fieldFecharegistro" class="control-label">Fecha de Registro</label>
-                    </div>
-                    <div class="col-md-2">
-                        {{ date_field("fechaRegistro", "size" : 10, "type" : "date", "class" : "form-control", "id" : "fieldFecharegistro") }}
-                    </div>
-                </div>
+
                 <div class="form-group">
                     <div class="col-md-3">
                     </div>
@@ -87,6 +78,18 @@
                     <div class="col-md-3">
                         {% if tipoCodigo is defined %}
                             {{ select("idTipoCodigo", tipoCodigo,'useEmpty': true, 'emptyText': 'Seleccione un Tipo de Código...', 'emptyValue': '', 'using': ['idTipoCodigo', 'descripcionTipo'], "class" : "form-control") }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="fieldIdmodulo" class="control-label">Módulo</label>
+                    </div>
+                    <div class="col-md-3">
+                        {% if modulo is defined %}
+                            {{ select("idModulo", modulo,'useEmpty': true, 'emptyText': 'Seleccione Módulo...', 'emptyValue': '', 'using': ['idModulo', 'descripcionModulo'], "class" : "form-control") }}
                         {% endif %}
                     </div>
                 </div>
