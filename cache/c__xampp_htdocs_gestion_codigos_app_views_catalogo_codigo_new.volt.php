@@ -20,8 +20,15 @@
                     <div class="col-md-2">
                         <label for="fieldValorcodigo" class="control-label">Código</label>
                     </div>
-                    <div class="col-md-2">
-                        <?= $this->tag->textField(['valorCodigo', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldValorcodigo']) ?>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <?= $this->tag->textField(['valorCodigo', 'size' => 30, 'class' => 'form-control', 'id' => 'valorCodigo']) ?>
+                            </div>
+                            <div class="col-sm-6">
+                                <?= $this->tag->submitButton(['Generar Codigo', 'id' => 'dugme', 'class' => 'col-sm-10 btn btn-primary']) ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -116,8 +123,8 @@
                     <div class="col-md-2">
                     </div>
                     <div class="col-md-2">
-                        <?= $this->tag->submitButton(['Guardar', 'class' => 'col-sm-10 btn btn-primary']) ?>
-                        <?= $this->tag->submitButton(['AJAX', 'class' => 'col-sm-10 btn btn-primary']) ?>
+                        <?= $this->tag->submitButton(['Guardar', 'id' => 'guardar', 'class' => 'col-sm-10 btn btn-primary']) ?>
+                        
                     </div>
                 </div>
             </div>
@@ -126,24 +133,14 @@
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        /*$.ajax({
-            url: "<?= $this->url->get('catalogo_codigo/ajax') ?>"
-        }).done(function(data) {
-            console.log(data)
-        });*/
-
-        $("#form").on("submit", function(e) {
-            e.preventDefault();
+$(document).ready(function() {
+        $('#dugme').on("click",function(e){
+        e.preventDefault();
             $.post("<?= $this->url->get('catalogo_codigo/ajaxPost') ?>", $(this).serialize() , function(data) {
-                console.log(data);
-alert(data[0]);
-            }).done(function() { 
-                alert("correcto");
+                document.getElementById("valorCodigo").value=data.res.email;
             }).fail(function() {
-                alert("error"); 
+                alert("no se pudo Generar Codigo"); 
             })
-        })
+        });
     })
-
 </script>
