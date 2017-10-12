@@ -21,13 +21,6 @@ class Modulo extends \Phalcon\Mvc\Model
 
     /**
      *
-     * @var integer
-     * @Column(type="integer", length=11, nullable=false)
-     */
-    public $correlativoModulo;
-
-    /**
-     *
      * @var string
      * @Column(type="string", length=500, nullable=false)
      */
@@ -69,19 +62,6 @@ class Modulo extends \Phalcon\Mvc\Model
     public function setPrefijoModulo($prefijoModulo)
     {
         $this->prefijoModulo = $prefijoModulo;
-
-        return $this;
-    }
-
-    /**
-     * Method to set the value of field correlativoModulo
-     *
-     * @param integer $correlativoModulo
-     * @return $this
-     */
-    public function setCorrelativoModulo($correlativoModulo)
-    {
-        $this->correlativoModulo = $correlativoModulo;
 
         return $this;
     }
@@ -143,16 +123,6 @@ class Modulo extends \Phalcon\Mvc\Model
     public function getPrefijoModulo()
     {
         return $this->prefijoModulo;
-    }
-
-    /**
-     * Returns the value of field correlativoModulo
-     *
-     * @return integer
-     */
-    public function getCorrelativoModulo()
-    {
-        return $this->correlativoModulo;
     }
 
     /**
@@ -228,7 +198,6 @@ class Modulo extends \Phalcon\Mvc\Model
         return [
             'idModulo' => 'idModulo',
             'prefijoModulo' => 'prefijoModulo',
-            'correlativoModulo' => 'correlativoModulo',
             'descripcionModulo' => 'descripcionModulo',
             'fechaRegistro' => 'fechaRegistro',
             'estadoRegistro' => 'estadoRegistro'

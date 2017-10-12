@@ -162,6 +162,7 @@
                             <li><?= $this->tag->linkTo(['persona/index', 'Persona']) ?></li>
                             <li><?= $this->tag->linkTo(['usuario/index', 'Usuario']) ?></li>
                             <li><?= $this->tag->linkTo(['modulo/index', 'Modulo']) ?></li>
+                            <li><?= $this->tag->linkTo(['tipocodigo_modulo/index', 'Tipo Codigo Modulo']) ?></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -216,6 +217,7 @@
                                 <li><?= $this->tag->linkTo(['persona/index', 'Persona']) ?></li>
                                 <li><?= $this->tag->linkTo(['usuario/index', 'Usuario']) ?></li>
                                 <li><?= $this->tag->linkTo(['modulo/index', 'Modulo']) ?></li>
+                                <li><?= $this->tag->linkTo(['tipocodigo_modulo/index', 'Tipo Codigo Modulo']) ?></li>
                             </ul>
                         </li> 
                         <li class="dropdown">

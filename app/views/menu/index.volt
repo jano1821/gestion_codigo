@@ -162,6 +162,7 @@
                             <li>{{ link_to("persona/index", "Persona") }}</li>
                             <li>{{ link_to("usuario/index", "Usuario") }}</li>
                             <li>{{ link_to("modulo/index", "Modulo") }}</li>
+                            <li>{{ link_to("tipocodigo_modulo/index", "Tipo Codigo Modulo") }}</li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -216,6 +217,7 @@
                                 <li>{{ link_to("persona/index", "Persona") }}</li>
                                 <li>{{ link_to("usuario/index", "Usuario") }}</li>
                                 <li>{{ link_to("modulo/index", "Modulo") }}</li>
+                                <li>{{ link_to("tipocodigo_modulo/index", "Tipo Codigo Modulo") }}</li>
                             </ul>
                         </li> 
                         <li class="dropdown">

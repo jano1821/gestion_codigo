@@ -30,17 +30,6 @@
 <div class="col-md-3">
 </div>
 <div class="col-md-2">
-<label for="fieldCorrelativomodulo" class="control-label">Correlativo Módulo</label>
-</div>
-<div class="col-md-2">
-{{ text_field("correlativoModulo", "type" : "numeric", "class" : "form-control", "id" : "fieldCorrelativomodulo") }}
-</div>
-</div>
-
-<div class="form-group">
-<div class="col-md-3">
-</div>
-<div class="col-md-2">
 <label for="fieldDescripcionmodulo" class="control-label">Descripción Módulo</label>
 </div>
 <div class="col-md-3">

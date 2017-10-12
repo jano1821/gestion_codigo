@@ -50,6 +50,22 @@ class CatalogoCodigoController extends ControllerBase {
         $tipocodigo = $this->request->getPost("idTipoCodigo");
         $modulo = $this->request->getPost("idModulo");
         
+        if($lidertecnico==''){
+            $lidertecnico='%';
+        }
+        
+        if($liderfuncional==''){
+            $liderfuncional='%';
+        }
+        
+        if($tipocodigo==''){
+            $tipocodigo='%';
+        }
+        
+        if($modulo==''){
+            $modulo='%';
+        }
+        
         $catalogo_codigo = $this->modelsManager->createBuilder()
                                 ->columns("cc.idCodigo,".
                                           "cc.valorCodigo,".
@@ -76,10 +92,10 @@ class CatalogoCodigoController extends ControllerBase {
                                         'valor'         => "%".$valorcodigo."%",
                                         'descripcion'   => "%".$descripcioncodigo."%",
                                         'requerimiento' => "%".$requerimiento."%",
-                                        'tecnico'       => "%".$lidertecnico."%",
-                                        'funcional'     => "%".$liderfuncional."%",
-                                        'tipo'          => "%".$tipocodigo."%",
-                                        'modulo'        => "%".$modulo."%",
+                                        'tecnico'       => $lidertecnico,
+                                        'funcional'     => $liderfuncional,
+                                        'tipo'          => $tipocodigo,
+                                        'modulo'        => $modulo,
                                     ]
                                 )
                                 ->orderBy('cc.valorCodigo')
@@ -347,35 +363,28 @@ class CatalogoCodigoController extends ControllerBase {
         ]);
     }
     
-    public function ajaxAction() {
-        $this->view->disable();
-        if ($this->request->isGet() == true) {
-            if ($this->request->isAjax() == true) {
-                $this->response->setJsonContent(array('res' => array("1", "2", "3")));
-                $this->response->setStatusCode(200,
-                                               "OK");
-                $this->response->send();
-            }
-        }else {
-            $this->response->setStatusCode(404,
-                                           "Not Found");
-        }
-    }
-
     public function ajaxPostAction() {
         $this->view->disable();
 
         if ($this->request->isPost() == true) {
             if ($this->request->isAjax() == true) {
-                //los datos quedan limpios automáticamente
-                /*$email = $this->request->getPost("email",
-                                                 "email");
-                $password = $this->request->getPost('password',
-                                                    array('striptags', 'alphanum', 'trim'));*/
+                $idTipoCodigo = $this->request->getPost("idTipoCodigo");
+                $idModulo = $this->request->getPost("idModulo");
+                
+                $tipocodigo = Tipocodigo::find($idTipoCodigo);
+                
+                $longitudCodigo = $tipocodigo->getLongitudCodigo();
+                if ($longitudCodigo > 0){
+                    $modulo = Modulo::find($idModulo);
+                }
+
                 $this->response->setJsonContent(array('res' => array("email" => "jano18_21@hotmail.com", "password" => "123abc$$")));
                 $this->response->setStatusCode(200,
                                                "OK");
                 $this->response->send();
+            }else{
+                $this->response->setStatusCode(406,
+                                               "Not Acceptable");
             }
         }else {
             $this->response->setStatusCode(404,

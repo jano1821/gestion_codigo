@@ -21,3 +21,23 @@ $(document).ready(function() {
         
     })
 </script>
+
+
+
+
+
+
+public function ajaxAction() {
+        $this->view->disable();
+        if ($this->request->isGet() == true) {
+            if ($this->request->isAjax() == true) {
+                $this->response->setJsonContent(array('res' => array("1", "2", "3")));
+                $this->response->setStatusCode(200,
+                                               "OK");
+                $this->response->send();
+            }
+        }else {
+            $this->response->setStatusCode(404,
+                                           "Not Found");
+        }
+    }

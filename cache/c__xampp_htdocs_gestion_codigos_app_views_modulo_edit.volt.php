@@ -30,17 +30,6 @@
 <div class="col-md-3">
 </div>
 <div class="col-md-2">
-<label for="fieldCorrelativomodulo" class="control-label">Correlativo Módulo</label>
-</div>
-<div class="col-md-2">
-<?= $this->tag->textField(['correlativoModulo', 'type' => 'numeric', 'class' => 'form-control', 'id' => 'fieldCorrelativomodulo']) ?>
-</div>
-</div>
-
-<div class="form-group">
-<div class="col-md-3">
-</div>
-<div class="col-md-2">
 <label for="fieldDescripcionmodulo" class="control-label">Descripción Módulo</label>
 </div>
 <div class="col-md-3">
@@ -66,7 +55,7 @@
 <label for="fieldEstadoregistro" class="control-label">Estado de Registro</label>
 </div>
 <div class="col-md-2">
-<?= $this->tag->selectStatic(['estadoRegistro', ['' => 'Seleccione Modulo...', 'S' => 'Activo', 'N' => 'Inactivo'], 'class' => 'form-control']) ?>
+<?= $this->tag->selectStatic(['estadoRegistro', ['' => 'Seleccione Estado...', 'S' => 'Activo', 'N' => 'Inactivo'], 'class' => 'form-control']) ?>
 </div>
 </div>
 

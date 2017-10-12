@@ -17,7 +17,6 @@
 <table class="table">
 <tr>
 <th>Prefijo del Módulo</th>
-<th>Correlativo del Módulo</th>
 <th>Descripcion del Módulo</th>
 <th>Fecha de Registro</th>
 
@@ -29,7 +28,6 @@
 {% for modulo in page.items %}
 <tr>
 <td>{{ modulo.prefijoModulo }}</td>
-<td>{{ modulo.correlativoModulo }}</td>
 <td>{{ modulo.descripcionModulo }}</td>
 <td>{{ modulo.fechaRegistro }}</td>
 

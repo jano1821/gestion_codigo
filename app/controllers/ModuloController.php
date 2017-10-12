@@ -22,25 +22,21 @@ class ModuloController extends ControllerBase {
         }
 
         $prefijomodulo = $this->request->getPost("PrefijoModulo");
-        $correlativomodulo = $this->request->getPost("correlativoModulo");
         $descripcionmodulo = $this->request->getPost("descripcionModulo");
         $estadoregistro = $this->request->getPost("estadoRegistro");
         
         $modulo = $this->modelsManager->createBuilder()
                                 ->columns("mo.idModulo idModulo,".
                                           "mo.prefijoModulo prefijoModulo,".
-                                          "mo.correlativoModulo correlativoModulo,".
                                           "mo.descripcionModulo descripcionModulo,".
                                           "DATE_FORMAT(mo.fechaRegistro, '%d/%m/%Y') fechaRegistro,".
                                           "mo.estadoRegistro estadoRegistro")
                                 ->addFrom('Modulo','mo')
                                 ->andWhere('mo.prefijoModulo like :prefijoModulo: AND '.
-                                           'mo.correlativoModulo like :correlativoModulo: AND '.
                                            'mo.descripcionModulo like :descripcionModulo: AND '.
                                            'mo.estadoRegistro like :estadoRegistro: ',
                                     [
                                         'prefijoModulo'         => "%".$prefijomodulo."%",
-                                        'correlativoModulo'   => "%".$correlativomodulo."%",
                                         'descripcionModulo'   => "%".$descripcionmodulo."%",
                                         'estadoRegistro'   => "%".$estadoregistro."%",
                                     ]
@@ -102,8 +98,6 @@ class ModuloController extends ControllerBase {
                                    $modulo->idModulo);
             $this->tag->setDefault("PrefijoModulo",
                                    $modulo->PrefijoModulo);
-            $this->tag->setDefault("correlativoModulo",
-                                   $modulo->correlativoModulo);
             $this->tag->setDefault("descripcionModulo",
                                    $modulo->descripcionModulo);
             $this->tag->setDefault("fechaRegistro",
@@ -129,7 +123,6 @@ class ModuloController extends ControllerBase {
 
         $modulo = new Modulo();
         $modulo->Prefijomodulo = $this->request->getPost("PrefijoModulo");
-        $modulo->Correlativomodulo = $this->request->getPost("correlativoModulo");
         $modulo->Descripcionmodulo = $this->request->getPost("descripcionModulo");
         $modulo->Fecharegistro = $this->request->getPost("fechaRegistro");
         $modulo->Estadoregistro = $this->request->getPost("estadoRegistro");
@@ -185,7 +178,6 @@ class ModuloController extends ControllerBase {
         }
 
         $modulo->Prefijomodulo = $this->request->getPost("PrefijoModulo");
-        $modulo->Correlativomodulo = $this->request->getPost("correlativoModulo");
         $modulo->Descripcionmodulo = $this->request->getPost("descripcionModulo");
         $modulo->Fecharegistro = $this->request->getPost("fechaRegistro");
         $modulo->Estadoregistro = $this->request->getPost("estadoRegistro");
