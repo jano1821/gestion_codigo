@@ -1,6 +1,5 @@
 <?php
 
-use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 class TipocodigoModuloController extends ControllerBase {
 
@@ -9,18 +8,9 @@ class TipocodigoModuloController extends ControllerBase {
      */
     public function indexAction() {
         parent::validarSession();
-        $queryTipoCodigo = parent::fromInput($this->di,
-                                             'Tipocodigo',
-                                             ['estadoRegistro' => 'S']
-        );
-        $tipocodigo = $queryTipoCodigo->getParams();
-
-        if ($tipocodigo) {
-            $tipocodigo = Tipocodigo::find($this->persistent->tipoCodigo);
-        }else {
-            $tipocodigo = array();
-        }
-
+        $parameters['order'] = "descripcionTipo ASC";
+        $tipocodigo = Tipocodigo::find($parameters);
+        
         $parameters['order'] = "descripcionModulo ASC";
         $modulo = Modulo::find($parameters);
 
@@ -32,6 +22,7 @@ class TipocodigoModuloController extends ControllerBase {
      * Searches for tipocodigo_modulo
      */
     public function searchAction() {
+        parent::validarSession();
         $numberPage = 1;
         if (!$this->request->isPost()) {
             $numberPage = $this->request->getQuery("page",
@@ -98,18 +89,10 @@ class TipocodigoModuloController extends ControllerBase {
      * Displays the creation form
      */
     public function newAction() {
-        $queryTipoCodigo = parent::fromInput($this->di,
-                                             'Tipocodigo',
-                                             ['estadoRegistro' => 'S']
-        );
-        $tipocodigo = $queryTipoCodigo->getParams();
-
-        if ($tipocodigo) {
-            $tipocodigo = Tipocodigo::find($this->persistent->tipoCodigo);
-        }else {
-            $tipocodigo = array();
-        }
-
+        parent::validarSession();
+        $parameters['order'] = "descripcionTipo ASC";
+        $tipocodigo = Tipocodigo::find($parameters);
+        
         $parameters['order'] = "descripcionModulo ASC";
         $modulo = Modulo::find($parameters);
 
@@ -125,6 +108,7 @@ class TipocodigoModuloController extends ControllerBase {
      */
     public function editAction($idTipoCodigo,
                                $idModulo) {
+        parent::validarSession();
         if (!$this->request->isPost()) {
             
             $tipocodigo_modulo = $this->modelsManager->createBuilder()
@@ -153,19 +137,11 @@ class TipocodigoModuloController extends ControllerBase {
                 return;
             }
             
-            $queryTipoCodigo = parent::fromInput($this->di,
-                                                 'Tipocodigo',
-                                                 ['estadoRegistro' => 'S']
-            );
-            $tipocodigo = $queryTipoCodigo->getParams();
+            $parameters['order'] = "descripcionTipo ASC";
+            $tipocodigo = Tipocodigo::find($parameters);
 
-            if ($tipocodigo) {
-                $tipocodigo = Tipocodigo::find($this->persistent->tipoCodigo);
-            }else {
-                $tipocodigo = array();
-            }
-
-            $modulo = Modulo::find($this->persistent->modulo);
+            $parameters['order'] = "descripcionModulo ASC";
+            $modulo = Modulo::find($parameters);
 
             foreach ($tipocodigo_modulo as $tupla) {
                 $this->view->tipoCodigo = $tipocodigo;
@@ -188,6 +164,7 @@ class TipocodigoModuloController extends ControllerBase {
      * Creates a new tipocodigo_modulo
      */
     public function createAction() {
+        parent::validarSession();
         if (!$this->request->isPost()) {
             $this->dispatcher->forward([
                             'controller' => "tipocodigo_modulo",
@@ -229,7 +206,7 @@ class TipocodigoModuloController extends ControllerBase {
      *
      */
     public function saveAction() {
-
+        parent::validarSession();
         if (!$this->request->isPost()) {
             $this->dispatcher->forward([
                             'controller' => "tipocodigo_modulo",
@@ -291,6 +268,7 @@ class TipocodigoModuloController extends ControllerBase {
      * @param string $idTipoCodigo
      */
     public function deleteAction($idTipoCodigo) {
+        parent::validarSession();
         $tipocodigo_modulo = TipocodigoModulo::findFirstByidTipoCodigo($idTipoCodigo);
         if (!$tipocodigo_modulo) {
             $this->flash->error("tipocodigo_modulo was not found");

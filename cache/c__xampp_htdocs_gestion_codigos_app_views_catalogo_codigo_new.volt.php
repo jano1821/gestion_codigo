@@ -133,14 +133,15 @@
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
+    $(document).ready(function() {
         $('#dugme').on("click",function(e){
-        e.preventDefault();
-            $.post("<?= $this->url->get('catalogo_codigo/ajaxPost') ?>", $(this).serialize() , function(data) {
-                document.getElementById("valorCodigo").value=data.res.email;
+            
+            e.preventDefault();
+            $.post("<?= $this->url->get('catalogo_codigo/ajaxPost') ?>", $('#form').serialize() , function(data) {
+                document.getElementById("valorCodigo").value=data.res.codigo;
             }).fail(function() {
-                alert("no se pudo Generar Codigo"); 
+                alert("no se pudo Generar Codigo");
             })
         });
-    })
+    });
 </script>

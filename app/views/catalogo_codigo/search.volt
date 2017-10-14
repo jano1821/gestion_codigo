@@ -13,6 +13,7 @@
 
 {{ content() }}
 
+{{ form("catalogo_codigo/search", "method":"post", "autocomplete" : "off", "class" : "form-horizontal") }}
 <div class="table-responsive">
 <table class="table">
 <tr  class="info">
@@ -49,24 +50,39 @@
 </table>
 </div>
 
+{{ hidden_field("valorCodigo") }}
+{{ hidden_field("descripcionCodigo") }}
+{{ hidden_field("Requerimiento") }}
+{{ hidden_field("idLiderTecnico") }}
+{{ hidden_field("idLiderFuncional") }}
+{{ hidden_field("idTipoCodigo") }}
+{{ hidden_field("idModulo") }}
+{{ hidden_field("pagina") }}
+{{ hidden_field("avance") }}
+
 <div class="row">
-<div class="col-sm-1">
+<div class="col-sm-2">
 <p class="pagination" style="line-height: 1.42857;padding: 6px 12px;">
-{{ page.current~"/"~page.total_pages }}
+{{ "Página "~page.current~" de "~page.total_pages }}
 </p>
 </div>
-<div class="col-sm-11">
+<div class="col-sm-10">
 <nav>
 <ul class="pagination">
-<li>{{ link_to("catalogo_codigo/search", "Primero") }}</li>
-<li>{{ link_to("catalogo_codigo/search?page="~page.before, "Anterior") }}</li>
-<li>{{ link_to("catalogo_codigo/search?page="~page.next, "Siguiente") }}</li>
-<li>{{ link_to("catalogo_codigo/search?page="~page.last, "Ultimo") }}</li>
+{{ submit_button('Primero', 'class': 'btn btn-info','onclick':'paginacion(0);') }}
+{{ submit_button('Anterior', 'class': 'btn btn-info','onclick':'paginacion(-1);') }}
+{{ submit_button('Siguiente', 'class': 'btn btn-info','onclick':'paginacion(1);') }}
+{{ submit_button('Ultimo', 'class': 'btn btn-info','onclick':'paginacion(2);') }}
 </ul>
 </nav>
 </div>
 </div>
-
+</form>
 </div>
 </div>
 </div>
+<script type="text/javascript">
+    function paginacion(valor){
+        document.getElementById('avance').value = valor;
+    }
+</script>

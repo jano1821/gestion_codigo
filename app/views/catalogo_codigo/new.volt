@@ -135,9 +135,10 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#dugme').on("click",function(e){
+            
             e.preventDefault();
-            $.post("{{ url('catalogo_codigo/ajaxPost') }}", $(this).serialize() , function(data) {
-                document.getElementById("valorCodigo").value=data.res.email;
+            $.post("{{ url('catalogo_codigo/ajaxPost') }}", $('#form').serialize() , function(data) {
+                document.getElementById("valorCodigo").value=data.res.codigo;
             }).fail(function() {
                 alert("no se pudo Generar Codigo");
             })

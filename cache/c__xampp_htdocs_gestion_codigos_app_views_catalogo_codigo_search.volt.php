@@ -13,6 +13,7 @@
 
 <?= $this->getContent() ?>
 
+<?= $this->tag->form(['catalogo_codigo/search', 'method' => 'post', 'autocomplete' => 'off', 'class' => 'form-horizontal']) ?>
 <div class="table-responsive">
 <table class="table">
 <tr  class="info">
@@ -49,24 +50,39 @@
 </table>
 </div>
 
+<?= $this->tag->hiddenField(['valorCodigo']) ?>
+<?= $this->tag->hiddenField(['descripcionCodigo']) ?>
+<?= $this->tag->hiddenField(['Requerimiento']) ?>
+<?= $this->tag->hiddenField(['idLiderTecnico']) ?>
+<?= $this->tag->hiddenField(['idLiderFuncional']) ?>
+<?= $this->tag->hiddenField(['idTipoCodigo']) ?>
+<?= $this->tag->hiddenField(['idModulo']) ?>
+<?= $this->tag->hiddenField(['pagina']) ?>
+<?= $this->tag->hiddenField(['avance']) ?>
+
 <div class="row">
-<div class="col-sm-1">
+<div class="col-sm-2">
 <p class="pagination" style="line-height: 1.42857;padding: 6px 12px;">
-<?= $page->current . '/' . $page->total_pages ?>
+<?= 'Página ' . $page->current . ' de ' . $page->total_pages ?>
 </p>
 </div>
-<div class="col-sm-11">
+<div class="col-sm-10">
 <nav>
 <ul class="pagination">
-<li><?= $this->tag->linkTo(['catalogo_codigo/search', 'Primero']) ?></li>
-<li><?= $this->tag->linkTo(['catalogo_codigo/search?page=' . $page->before, 'Anterior']) ?></li>
-<li><?= $this->tag->linkTo(['catalogo_codigo/search?page=' . $page->next, 'Siguiente']) ?></li>
-<li><?= $this->tag->linkTo(['catalogo_codigo/search?page=' . $page->last, 'Ultimo']) ?></li>
+<?= $this->tag->submitButton(['Primero', 'class' => 'btn btn-info', 'onclick' => 'paginacion(0);']) ?>
+<?= $this->tag->submitButton(['Anterior', 'class' => 'btn btn-info', 'onclick' => 'paginacion(-1);']) ?>
+<?= $this->tag->submitButton(['Siguiente', 'class' => 'btn btn-info', 'onclick' => 'paginacion(1);']) ?>
+<?= $this->tag->submitButton(['Ultimo', 'class' => 'btn btn-info', 'onclick' => 'paginacion(2);']) ?>
 </ul>
 </nav>
 </div>
 </div>
-
+</form>
 </div>
 </div>
 </div>
+<script type="text/javascript">
+    function paginacion(valor){
+        document.getElementById('avance').value = valor;
+    }
+</script>
